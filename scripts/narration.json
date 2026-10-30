@@ -1,0 +1,8 @@
+[
+  {"scene":"HookScene", "startFrame":0, "endFrame":180, "text":"Welcome to the Agent Engine"},
+  {"scene":"TwistScene", "startFrame":180, "endFrame":330, "text":"Unexpected shift in logic"},
+  {"scene":"ShiftScene", "startFrame":330, "endFrame":510, "text":"Transition state reconfiguration"},
+  {"scene":"MechanismScene", "startFrame":510, "endFrame":720, "text":"Core mechanism engagement"},
+  {"scene":"PayoffScene", "startFrame":720, "endFrame":900, "text":"Ultimate resolution achieved"},
+  {"scene":"OutroScene", "startFrame":900, "endFrame":1547, "text":"Final conclusion complete"}
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "word": "Welcome",
+    "startFrame": 9,
+    "endFrame": 23,
+    "scene": "HookScene"
+  },
+  {
+    "word": "to",
+    "startFrame": 26,
+    "endFrame": 37,
+    "scene": "HookScene"
+  },
+  {
+    "word": "the",
+    "startFrame": 40,
+    "endFrame": 49,
+    "scene": "HookScene"
+  },
+  {
+    "word": "Agent",
+    "startFrame": 52,
+    "endFrame": 68,
+    "scene": "HookScene"
+  },
+  {
+    "word": "Engine",
+    "startFrame": 71,
+    "endFrame": 85,
+    "scene": "HookScene"
+  },
+  {
+    "word": "Unexpected",
+    "startFrame": 189,
+    "endFrame": 215,
+    "scene": "TwistScene"
+  },
+  {
+    "word": "shift",
+    "startFrame": 218,
+    "endFrame": 233,
+    "scene": "TwistScene"
+  },
+  {
+    "word": "in",
+    "startFrame": 236,
+    "endFrame": 246,
+    "scene": "TwistScene"
+  },
+  {
+    "word": "logic",
+    "startFrame": 249,
+    "endFrame": 263,
+    "scene": "TwistScene"
+  },
+  {
+    "word": "Transition",
+    "startFrame": 339,
+    "endFrame": 361,
+    "scene": "ShiftScene"
+  },
+  {
+    "word": "state",
+    "startFrame": 364,
+    "endFrame": 378,
+    "scene": "ShiftScene"
+  },
+  {
+    "word": "reconfiguration",
+    "startFrame": 381,
+    "endFrame": 412,
+    "scene": "ShiftScene"
+  },
+  {
+    "word": "Core",
+    "startFrame": 519,
+    "endFrame": 530,
+    "scene": "MechanismScene"
+  },
+  {
+    "word": "mechanism",
+    "startFrame": 533,
+    "endFrame": 553,
+    "scene": "MechanismScene"
+  },
+  {
+    "word": "engagement",
+    "startFrame": 556,
+    "endFrame": 581,
+    "scene": "MechanismScene"
+  },
+  {
+    "word": "Ultimate",
+    "startFrame": 729,
+    "endFrame": 746,
+    "scene": "PayoffScene"
+  },
+  {
+    "word": "resolution",
+    "startFrame": 749,
+    "endFrame": 772,
+    "scene": "PayoffScene"
+  },
+  {
+    "word": "achieved",
+    "startFrame": 775,
+    "endFrame": 795,
+    "scene": "PayoffScene"
+  },
+  {
+    "word": "Final",
+    "startFrame": 909,
+    "endFrame": 923,
+    "scene": "OutroScene"
+  },
+  {
+    "word": "conclusion",
+    "startFrame": 926,
+    "endFrame": 946,
+    "scene": "OutroScene"
+  },
+  {
+    "word": "complete",
+    "startFrame": 949,
+    "endFrame": 962,
+    "scene": "OutroScene"
+  }
+]
