@@ -164,7 +164,10 @@ class SkillPackagingTests(unittest.TestCase):
         for file in ['references/operating-contract.md','references/creative-direction.md',
                      'references/production-and-review.md','references/visual-proof-and-handoff.md',
                      'references/platform-sources.md','templates/production-plan.md',
-                     'templates/claim-proof-map.md','templates/review.md','templates/revision-log.md']:
+                     'templates/claim-proof-map.md','templates/review.md','templates/revision-log.md',
+                     'code-video/CONTRACT.md','code-video/manifest.schema.json',
+                     'code-video/tools/vector_profile.py','code-video/tools/qa.py',
+                     'code-video/tools/measured_checks.py','code-video/examples/vector-example.json']:
             with self.subTest(file=file): self.assertTrue((ROOT/file).is_file())
     def test_standalone_fallback_and_routing_documented(self):
         skill=(ROOT/'SKILL.md').read_text()

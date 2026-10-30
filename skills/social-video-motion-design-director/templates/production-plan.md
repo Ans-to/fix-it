@@ -31,4 +31,8 @@ Per-placement spec, source URL, access date, locale/device/overlay and verificat
 Confirmed/proposed fps and duration, rounding and total:
 Normalized beats or illustrative timing if unconfirmed:
 Overlaps, audio offsets, captions and deterministic render rules:
+Code-video mode (plan / manifest / source / render), engine and version:
+Authoritative manifest path + schema/version + validated status; separate audio/caption authorities:
 Manifest, required assets/fonts/stems, delivery and exact hash comparison status:
+Deterministic frame function, seed, exact coordinate/anchor/easing/layer rules, renderer and font versions:
+Named QA checks, actual evidence, coverage and missing checks (see `code-video/CONTRACT.md`):

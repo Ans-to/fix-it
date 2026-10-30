@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "illustrative",
+  "timing": {
+    "fps": {
+      "numerator": 4,
+      "denominator": 1,
+      "status": "PROPOSED",
+      "provenance": "Illustrative example only, not an approved user requirement."
+    },
+    "duration_seconds": {
+      "numerator": 2,
+      "denominator": 1,
+      "status": "PROPOSED",
+      "provenance": "Illustrative example only, not an approved user requirement."
+    },
+    "total_frames": 8
+  },
+  "canvas": {
+    "width": 160,
+    "height": 90,
+    "background": "#101820"
+  },
+  "camera": {
+    "scale": 1,
+    "anchor": [
+      80,
+      45
+    ],
+    "offset": [
+      0,
+      0
+    ]
+  },
+  "asset_policy": {
+    "allowed": [],
+    "assets": []
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "start": 0,
+      "end": 4
+    },
+    {
+      "id": "arrival",
+      "start": 4,
+      "end": 8
+    }
+  ],
+  "objects": [
+    {
+      "id": "rail",
+      "type": "line",
+      "visible": [
+        0,
+        8
+      ],
+      "space": "world",
+      "z": 0,
+      "geometry": {
+        "x1": 20,
+        "y1": 45,
+        "x2": 140,
+        "y2": 45
+      },
+      "style": {
+        "fill": null,
+        "stroke": "#FFFFFF",
+        "stroke_width": 2,
+        "opacity": 1
+      },
+      "animations": []
+    },
+    {
+      "id": "track",
+      "type": "rect",
+      "visible": [
+        0,
+        8
+      ],
+      "space": "screen",
+      "z": 1,
+      "geometry": {
+        "x": 10,
+        "y": 10,
+        "width": 140,
+        "height": 70
+      },
+      "style": {
+        "fill": null,
+        "stroke": "#64D8CC",
+        "stroke_width": 2,
+        "opacity": 1
+      },
+      "animations": []
+    },
+    {
+      "id": "token",
+      "type": "circle",
+      "visible": [
+        0,
+        8
+      ],
+      "space": "world",
+      "z": 2,
+      "geometry": {
+        "cx": 30,
+        "cy": 45,
+        "radius": 8
+      },
+      "style": {
+        "fill": "#64D8CC",
+        "stroke": null,
+        "stroke_width": 0,
+        "opacity": 1
+      },
+      "animations": [
+        {
+          "property": "translate_x",
+          "start": 0,
+          "end": 7,
+          "from": 0,
+          "to": 100,
+          "easing": "smoothstep"
+        }
+      ]
+    }
+  ]
+}

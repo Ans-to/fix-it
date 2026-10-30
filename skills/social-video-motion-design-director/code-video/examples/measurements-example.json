@@ -1,0 +1,12 @@
+{
+  "evidence": "Synthetic demonstration values; not measured from a rendered video.",
+  "checks": [
+    {"id":"viewport-box", "frame":0, "type":"bounds", "outer":[0,0,160,90], "inner":[10,10,150,80]},
+    {"id":"two-labels", "frame":0, "type":"text_overlap", "a":[10,10,40,20], "b":[50,10,80,20]},
+    {"id":"inside-panel", "frame":0, "type":"rect_containment", "outer":[0,0,100,50], "inner":[10,10,90,40], "margin":2},
+    {"id":"inside-circle", "frame":0, "type":"circle_containment", "center":[50,50], "radius":30, "inner":[40,40,60,60], "margin":2},
+    {"id":"connector-contact", "frame":0, "type":"connector_endpoint", "endpoint":[80,50], "center":[50,50], "radius":30, "tolerance":1},
+    {"id":"contrast-white", "frame":0, "type":"contrast", "foreground":"#FFFFFF", "background":"#000000", "target":4.5},
+    {"id":"caption-line", "frame":0, "type":"caption_fit", "outer":[0,0,120,30], "inner":[10,5,110,25], "margin":2}
+  ]
+}
