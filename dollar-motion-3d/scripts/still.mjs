@@ -1,0 +1,12 @@
+import {bundle} from '@remotion/bundler';
+import {selectComposition,renderStill} from '@remotion/renderer';
+import chromium from '@sparticuz/chromium';
+import path from 'node:path';
+const root=path.resolve('dollar-motion-3d');
+const serveUrl=await bundle({entryPoint:path.join(root,'src/index.jsx'),publicDir:path.join(root,'public')});
+const browserExecutable=await chromium.executablePath();
+const opts={browserExecutable,chromiumOptions:{gl:'swangle'},logLevel:'info'};
+const composition=await selectComposition({serveUrl,id:'Dollar3D',...opts});
+const frame=Number(process.argv[2]||'45'); const output=process.argv[3]||'/tmp/dollar-3d-preview.png';
+await renderStill({serveUrl,composition,frame,output,imageFormat:'png',scale:.5,...opts});
+console.log(`Wrote frame ${frame}: ${output}`);

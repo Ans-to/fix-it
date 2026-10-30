@@ -1,0 +1,3 @@
+# Only needed for the optional Python mix/check scripts, not for rendering existing WAVs.
+numpy==2.4.6
+jsonschema==4.26.0

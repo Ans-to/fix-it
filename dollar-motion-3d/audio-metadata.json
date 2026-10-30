@@ -1,0 +1,10 @@
+{
+  "duration_seconds": 15,
+  "sample_rate": 48000,
+  "voice": "am_eric, unchanged clips from prior test",
+  "music": "original procedural minor-key pulse, 106 BPM",
+  "sfx": "original procedural transition swooshes and short impacts",
+  "peak_linear": 0.4933696034435595,
+  "rms_linear": 0.08117145727338775,
+  "limitations": "generated signal has not received a human listening review"
+}

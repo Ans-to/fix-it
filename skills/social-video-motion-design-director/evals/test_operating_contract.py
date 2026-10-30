@@ -163,7 +163,7 @@ class SkillPackagingTests(unittest.TestCase):
     def test_all_required_companions_exist(self):
         for file in ['references/operating-contract.md','references/creative-direction.md',
                      'references/production-and-review.md','references/visual-proof-and-handoff.md',
-                     'references/platform-sources.md','templates/production-plan.md',
+                     'references/platform-sources.md','references/motion-first-quality.md','templates/production-plan.md',
                      'templates/claim-proof-map.md','templates/review.md','templates/revision-log.md',
                      'code-video/CONTRACT.md','code-video/manifest.schema.json',
                      'code-video/tools/vector_profile.py','code-video/tools/qa.py',
@@ -173,5 +173,21 @@ class SkillPackagingTests(unittest.TestCase):
         skill=(ROOT/'SKILL.md').read_text()
         for phrase in ['Fallback minimum','Script-only','PARTIAL','PROPOSED','NOT CHECKED']:
             with self.subTest(phrase=phrase): self.assertIn(phrase,skill)
+
+class MotionFirstContractTests(unittest.TestCase):
+    def test_motion_first_gate_is_required_and_rejects_slides(self):
+        entry=(ROOT/'SKILL.md').read_text()
+        gate=(ROOT/'references/motion-first-quality.md').read_text()
+        self.assertIn('explicit anti-slideshow acceptance gate',entry)
+        for phrase in ['pre-state → animated transformation → post-state',
+                       'stationary layouts with brief fades',
+                       'meaningful development', 'not just at its boundary']:
+            with self.subTest(phrase=phrase): self.assertIn(phrase,gate)
+    def test_playback_and_audio_limitations_are_explicit(self):
+        gate=(ROOT/'references/motion-first-quality.md').read_text()
+        for phrase in ['Watch final playback at 1×', 'listen to the final mix',
+                       'continuous-motion, pacing and listening review NOT CHECKED',
+                       'FAIL or NEEDS HUMAN REVIEW']:
+            with self.subTest(phrase=phrase): self.assertIn(phrase,gate)
 
 if __name__=='__main__': unittest.main(verbosity=2)

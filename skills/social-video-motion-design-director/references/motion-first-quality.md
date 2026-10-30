@@ -1,0 +1,15 @@
+# Motion-first creative quality gate
+
+When the brief asks for advanced motion graphics, kinetic typography, camera work or 3D, treat those as required deliverables—not merely decorative possibilities. A video is not an adequate fulfillment if it consists mainly of stationary layouts with brief fades, small orbiting dots and hard cuts, unless the user explicitly requests that style. Accessibility, factual accuracy and readability remain mandatory: continuous frenetic movement is not inherently better.
+
+## Before building
+
+Create a **motion score**. For each story beat record: purpose and proof; actual text/VO; focal subject; pre-state → animated transformation → post-state; text choreography (word/letter, positions, scale, reveal, rotation and legible hold); dimensional scene, lighting/material and camera path when 3D is requested; transitions that carry one visual idea into the next; sound cue and its relationship to motion; timing confidence; and how it remains readable on a phone. Distinguish real 3D geometry/camera from 2D effects. Label material visual assumptions. Explain what visibly changes within the beat, not just at its boundary. Require a clear interaction or meaningful development rather than treating a static hub as proof of a network effect.
+
+List artistic risks and expected contrast between beats. Pre-plan a small high-quality moving preview with representative text, geometry, lighting and a transition before committing to the full piece when feasible. A toolchain choice does not by itself establish visual quality. If required 3D or text animation cannot be rendered, disclose the limitation and ask before substituting simpler work.
+
+## Reject the slideshow failure mode
+
+Inspect the rendered sequence, not just keyframes. For each beat, log at least start/middle/end plus meaningful transformation and transition moments, the expected motion, observed evidence, and whether text settles for an appropriate hold. Check that main movement is visibly substantial and purposeful—not just an opacity change, a static card replacement, one wandering dot, or a small decorative background loop. Check typographic choreography, scene continuity, camera depth/parallax when applicable, and audio accents against the actual recording. No arbitrary constant motion quota: allow intentional stillness and protect reading time. If most beats fail the requested motion standard, mark the creative requirement FAIL or NEEDS HUMAN REVIEW; do not call it an advanced motion video because a video file or 3D library exists.
+
+Watch final playback at 1× and listen to the final mix if tools permit; check phone-sized playback and actual placement overlays separately. If the agent can only inspect stills, code or waveforms, report continuous-motion, pacing and listening review NOT CHECKED. Ask a human or an audio/video-capable reviewer for a full-playback assessment. Sampled stills, all-frame geometry and encoded metadata cannot prove creative quality or sound synchronization. Log defects with before/after evidence and recheck adjacent transitions. Do not promise professional quality or retention without review.

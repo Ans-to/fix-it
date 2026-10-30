@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dollar-motion-threejs-v1.0.0.schema.json",
+  "title": "Dollar motion Three.js test profile v1.0.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "status", "format", "voice", "scenes", "sources"],
+  "properties": {
+    "schema_version": {"const": "motion-threejs-v1.0.0"},
+    "status": {"type":"string","minLength":1},
+    "format": {"type":"object","additionalProperties":false,"required":["width","height","fps","duration_frames","duration_seconds"],"properties":{"width":{"type":"integer","minimum":1},"height":{"type":"integer","minimum":1},"fps":{"type":"integer","minimum":1},"duration_frames":{"type":"integer","minimum":1},"duration_seconds":{"type":"number","exclusiveMinimum":0}}},
+    "voice": {"type":"string","minLength":1},
+    "scenes": {"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["id","start","end","voice_start","voice_duration","lines","caption","motion"],"properties":{"id":{"type":"string","minLength":1},"start":{"type":"integer","minimum":0},"end":{"type":"integer","minimum":1},"voice_start":{"type":"integer","minimum":0},"voice_duration":{"type":"number","exclusiveMinimum":0},"lines":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"caption":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"motion":{"type":"string","minLength":1}}}},
+    "sources": {"type":"array","minItems":1,"items":{"type":"string","format":"uri"}}
+  }
+}

@@ -1,0 +1,10 @@
+import {bundle} from '@remotion/bundler';
+import {selectComposition,renderMedia} from '@remotion/renderer';
+import chromium from '@sparticuz/chromium';
+import path from 'node:path';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const serveUrl=await bundle({entryPoint:path.join(root,'src/index.jsx'),publicDir:path.join(root,'public')});
+const browserExecutable=await chromium.executablePath();const opts={browserExecutable,chromiumOptions:{gl:'swangle'},logLevel:'info'};
+const composition=await selectComposition({serveUrl,id:'Dollar3D',...opts});
+const test=process.argv.includes('--benchmark');
+await renderMedia({serveUrl,composition,codec:'h264',audioCodec:'aac',outputLocation:test?'/tmp/dollar-3d-benchmark.mp4':path.join(root,'dollar-motion-3d.mp4'),concurrency:2,crf:18,scale:test?1:1,...(test?{frameRange:[0,29]}:{}),...opts,onProgress:({renderedFrames,encodedFrames})=>{if(renderedFrames%30===0)console.log('progress',renderedFrames,encodedFrames)}});

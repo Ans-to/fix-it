@@ -1,0 +1,11 @@
+# Dollar 3D motion test
+
+`dollar-motion-3d.mp4` is the 15-second test, with original 3D geometry, animated type and original synthesized music/effects. `captions.srt` is a separate sentence-level subtitle file. See `production-plan.md` for the storyboard, source map and timing authority, and `review.md` for the actual validation and the important unreviewed playback/audio risks.
+
+## Rebuild
+
+Node 20+ and npm are required. From this directory: `npm ci`, then `npm run render`. The bundled `@sparticuz/chromium` targets Linux x64; render requires a compatible Chromium and WebGL implementation. Remotion and Chromium may require Linux libraries. On a stripped-down Debian environment missing NSS/NSPR, run `node scripts/setup-chromium.mjs /tmp/dollar-chromium-libs` and then `LD_LIBRARY_PATH=/tmp/dollar-chromium-libs/lib:/tmp:$LD_LIBRARY_PATH npm run render`. The script extracts libraries already included in the installed Chromium npm package and does not change system files. The renderer uses `swangle` software WebGL and 2 workers; this can take several minutes. This environment workaround is not a guarantee of portability. `scripts/still.mjs` and `scripts/sample.mjs` are inspection utilities intended to be invoked from the repository root.
+
+The existing WAV assets let you rebuild without a TTS model. `pip install -r requirements.txt` installs the optional Python checking/mixing dependencies. `scripts/make-audio.py` regenerates the 48 kHz mix from those voice clips using Python and NumPy; `voice-metadata.json` identifies the original Kokoro model and voice. The 92 MB TTS model is not included. Recreating the voice from scratch requires the generation dependencies and model in the earlier `dollar-video-test/` project.
+
+Anton, Manrope and IBM Plex Mono have accompanying OFL text in `public/fonts/`. Code dependency licenses and Remotion's license, including its potential commercial-use requirements, are separate: https://www.remotion.dev/license . Production use should review applicable software/model licensing and intended-platform rules. The soundtrack's bed and effects are procedurally synthesized for this project. The gold/metal visuals and particle network are generated from code; no third-party image/video source is used.

@@ -1,0 +1,17 @@
+{
+  "schema_version": "motion-threejs-v1.0.0",
+  "status": "ILLUSTRATIVE TEST; output dimensions and fps are proposed",
+  "format": {"width": 1080, "height": 1920, "fps": 30, "duration_frames": 450, "duration_seconds": 15},
+  "voice": "Kokoro-82M-v1.0 q8, am_eric, speed 1.08; original voice clips reused unchanged from the earlier test",
+  "scenes": [
+    {"id":"question", "start":0, "end":85, "voice_start":5, "voice_duration":2.5086666666666666, "lines":["WHY THE", "DOLLAR?"], "caption":["Why does so much of the world", "rely on dollars?"], "motion":"Kinetic staggered type, moving 3D gold coin, orbiting particle trails and a continuous camera move."},
+    {"id":"markets", "start":85, "end":195, "voice_start":87, "voice_duration":3.541125, "lines":["DEEP MARKETS.", "EASY TO TRADE."], "caption":["Deep U.S. financial markets make", "dollars easy to trade and hold."], "motion":"The same coin moves and turns through animated non-data-bearing market rails; buy, sell and hold labels arrive in time."},
+    {"id":"network", "start":195, "end":302, "voice_start":197, "voice_duration":3.24125, "lines":["MORE USERS.", "MORE OPTIONS."], "caption":["As more people accept dollars,", "they become more useful to others."], "motion":"Network participants appear over time; new participant D is linked and an animated token travels to participant A through the USD unit. This is an illustrative model."},
+    {"id":"payoff", "start":302, "end":450, "voice_start":303, "voice_duration":3.281083333333333, "lines":["THE LEADER.", "NOT THE ONLY."], "caption":["That helps the dollar lead, but it's", "not the only global currency."], "motion":"The dollar coin moves aside as separate euro and yen coins enter with depth and rotation; type resolves into the qualified answer."}
+  ],
+  "sources": [
+    "https://www.federalreserve.gov/econres/notes/feds-notes/2nd-annual-international-roles-of-the-us-dollar-conference-20230623.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/fifth-conference-on-the-international-roles-of-the-u-s-dollar-stablecoins-digital-payments-and-the-ir-of-the-usd-20260716.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/the-international-role-of-the-u-s-dollar-2025-edition-20250718.html"
+  ]
+}
