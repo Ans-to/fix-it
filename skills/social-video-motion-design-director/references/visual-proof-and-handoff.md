@@ -1,0 +1,30 @@
+# Visual proof, handoff integrity and review
+
+Use these checks for full storyboards and evidence-based review. They identify risks, not a guarantee that an audience will understand or stay engaged.
+
+## 1. Deliver what the plan depends on
+
+- If a plan calls a manifest, image, font, cue sheet or other file authoritative, actually include it or link an accessible copy in the deliverable. An embedded manifest is a useful standalone alternative. State which copy controls if they differ, and check the copies; never claim an absent dependency was delivered.
+- Only publish a checksum calculated from the **actual shipped bytes**, with algorithm and exact file identified. If you also discuss an embedded copy, distinguish parsed semantic equivalence from byte-for-byte equality. Specify encoding, line endings, final newline and an exact extraction/canonicalization rule before claiming byte equality; compute the relevant hashes separately. Never infer a mismatch merely because content is embedded or pretty-printed; verify it. If bytes cannot be read or compared, mark integrity NOT CHECKED, omit any invented hash and explain what remains to verify.
+- Keep enough of the handoff together that the recipient can obtain the authoritative information, and test links and file presence when tools permit.
+
+## 2. Trace the claim across channels
+
+Make a small claim/proof map for load-bearing beats: **claim and source → required qualifier → exact narration → heading/on-screen copy → visual mechanism → payoff**. Verify each channel is no stronger or broader than the source. Preserve qualifiers that matter (e.g., “foreign central banks” rather than an unqualified “banks”; a suspension is not necessarily an immediate permanent ending). If text would be too long, revise layout, split it into lines, or explicitly make the role clear elsewhere—not by silently dropping the qualifier.
+
+Check the meaningful listening-only path as well as the visual path: where a qualification changes the meaning (e.g., “leading, not the only one”), convey it in narration or another appropriate accessible audio alternative as well as on screen. For intentionally silent work, use readable on-screen language and a descriptive alternative appropriate to the output. Synchronized captions must match the final audio, including relevant non-speech sounds; they do not replace audio description of essential visuals.
+
+## 3. Show the actual action and payoff
+
+- Describe a visual event by observable geometry and timing: object, path, start/end, duration, contact or overlap, camera, layers and purpose. A token that merely moves in the space between two parties does not necessarily reach either one.
+- For circular actors with centers `A`, `B` and radii `rA`, `rB`, edge-to-edge gap at a state is `distance(A,B) − rA − rB`. If contact is required, specify a tolerance and use `abs(gap) <= tolerance`, or define an intended overlap. Account for stroke, transforms and visibility. For example, with centers 250 and 830, actor radius 70 and token radius 50 on the same axis, edge contact at the left and right actors occurs at token centers 370 and 710, respectively. A center of 320 or 760 overlaps the actor; contact need not mean moving the token center inside it. Verify the actual trajectory at all relevant frames.
+- A hub and spokes show connectivity or centrality; by themselves they do not demonstrate a network effect. When the narration claims reinforcement, plan an understandable progression such as a new user joining and a subsequent user benefiting or more links becoming useful. Label the sequence as an explanatory model, not empirical proof of causation or a measured improvement. If the visual does not show that progression, describe it honestly as connectivity.
+- Bookend the opening: revisit its parties, question or visual setup where useful, and give the direct answer before a summary. The closing should resolve the precise promise, not just list abstract concepts.
+- Audit every element for a purpose. A blank node may be an intentional anonymous participant or decoration, but its meaning must be clear from context; label or remove it if it could confuse the viewer. Do not require labels for every decorative mark. Mark a partial list of examples as illustrative and not exhaustive when omission could mislead; do not use relative size as an unsourced data chart.
+
+## 4. Specific, bounded verification
+
+- Identify every distinct foreground and actual background combination in the supplied/rendered design, including text inside panels and symbols inside circles, and check each applicable pair. Report the pairs and evidence, not just a representative subset. For changing, transparent, antialiased or moving backgrounds/foregrounds, inspect effective composited contrast during the relevant legible hold and note any untested animation frames. Numeric contrast alone is not an accessibility certification.
+- Check text-to-text bounds and text-to-container bounds for rectangles **and circles** where containment is intended. For a conservative unrotated circular containment test, every corner of the text's measured bounding box should fall inside the usable radius (allow margin for the outline). Apply the actual font, transforms, zoom, offsets and opacity states; more complex shapes, rotated text or intentional clipping need appropriate handling. A bounding-box test is conservative and does not replace rendered visual review.
+- Distinguish actual rendered playback and audio inspection from plan-only geometry, stills and metadata. Report each check's exact scope; mark untested full collisions, motion, captions, contrast, placement and audience comprehension as NOT CHECKED rather than granting a broad PASS.
+- For each revision claim, retain enough evidence to verify the observed before and after: scene and frame/time, exact prior copy or geometry, revised copy or geometry, evidence source and the recheck. If the original state was not retained, say so; do not fabricate before-values. Recheck affected and neighboring states because a fix can create a new defect.

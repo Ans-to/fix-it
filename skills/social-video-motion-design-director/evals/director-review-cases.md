@@ -1,0 +1,21 @@
+# Director-review regression scenarios
+
+These are future agent-evaluation cases, not claims that an independent agent has already passed them. Run each brief against the skill and a baseline; check the actual generated artifacts and review evidence.
+
+1. **Missing dependency:** Ask for a self-contained storyboard that names `visual-plan.json` authoritative. Expected: the actual manifest is delivered or embedded, linked and internally consistent; missing or stale copies are flagged, not passed.
+2. **Object and camera ambiguity:** Request a zoom around an anchor offset from viewport center with a heading and subheading. Expected: viewport center and anchor are distinct and explicit; both text groups have explicit transform and entry behavior.
+3. **Claim/visual mismatch:** A voiceover says one currency is not the only currency, but the illustration shows just one, and a heading says a system ended when sources support only a suspension. Expected: flag the representation and overstatement; revise or mark an intentional constraint. Do not assert causality or invent statistics.
+4. **Path and graph topology:** A token only moves near the middle while narration describes a transfer; network lines stop short of their nodes. Expected: flag the mismatch, design a connected path and check endpoints during entry as well as at rest, or explain intentional gaps.
+5. **Illustrative examples:** Show a few currency symbols as examples. Expected: avoid implying an exhaustive list or data-scaled shares without evidence.
+6. **Caption and UI:** Include a one-line and a two-line caption page without a verified platform placement. Expected: explicitly define both layouts; mark exact cue sync and platform safe area unverified until evidence is available.
+7. **Review overclaim:** Offer a bounds-only test and selected still frames. Expected: narrowly pass checked bounds; leave full collision, playback, audio, compliance and viewer outcomes unchecked.
+8. **Fact-source match:** Provide broad "trade" language where the source discusses invoicing. Expected: use source-aligned wording and distinguish invoicing from settlement unless each is supported.
+
+## Added cases for the dollar-script feedback
+
+9. **Real hash, different representations:** Give an actual JSON file plus embedded text, with a claimed file hash. Verify the file bytes and the hash. Separately decide whether the embedded content is byte-equal using an explicit final-newline/encoding rule, or only semantically equivalent. Do not invent a failure when the actual bytes verify, or report success when no bytes were inspected.
+10. **Qualifiers across channels:** Narration says a conversion was suspended and applies to foreign central banks; the heading says the whole system permanently ended and an on-screen label says only “banks.” Expected: identify both overstatements and preserve the source's actual scope. Ask for missing source evidence rather than independently asserting the event.
+11. **Network effect vs. connectivity:** A diagram has a hub and three static spokes, while narration claims use makes future use easier. Expected: flag it as connectivity, suggest an illustrative growth/benefit sequence or relabel the claim; do not say the animation proves the mechanism.
+12. **Hook/payoff and contact:** Opening asks why two entities use a shared currency; the final card lists abstract factors and a token stops short of both entities. Expected: explicitly answer the original question, reuse the parties if helpful, and calculate actual boundary contact/overlap using object radii.
+13. **Contrast and circle containment:** Supply text in rectangles and circles with several foreground/background pairs, including fade states. Expected: enumerate and check actual pairings and circle-contained text; identify which animation states and backgrounds are untested. Do not issue blanket accessibility approval.
+14. **Audio-only and evidence of changes:** A key “not the only” qualifier appears only on screen, and a claimed before/after fix has no prior frame or exact copy. Expected: identify the audio-only omission and mark the old state unavailable rather than inventing evidence. Treat decorative unlabeled elements as acceptable only when their purpose is clear.

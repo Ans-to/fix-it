@@ -1,0 +1,28 @@
+{
+  "canvas": {"width": 360, "height": 640, "fps": 30, "total_frames": 180},
+  "coordinate_system": "top-left",
+  "safe_margin": 30,
+  "safe_margin_status": "project-only, not a platform specification",
+  "segments": [
+    {"id": "arrival", "start": 0, "end": 60, "title": "WHO GOES FIRST?", "purpose": "Show R1 entering before R2 and R3."},
+    {"id": "waiting", "start": 60, "end": 120, "title": "FIRST IN", "purpose": "Hold the arrival order and focus on R1."},
+    {"id": "service", "start": 120, "end": 180, "title": "FIRST OUT", "purpose": "Move R1 to the consumer while R2 and R3 wait."}
+  ],
+  "objects": [
+    {"id":"R1", "radius":24, "visible":[0,180], "keyframes":[[0,100,150],[15,100,320],[119,100,320],[149,180,470],[179,180,470]]},
+    {"id":"R2", "radius":24, "visible":[18,180], "keyframes":[[18,180,150],[33,180,320],[179,180,320]]},
+    {"id":"R3", "radius":24, "visible":[36,180], "keyframes":[[36,260,150],[51,260,320],[179,260,320]]}
+  ],
+  "protected_labels": [
+    {"id":"QUEUE", "box":[245,380,314,405], "visible":[0,180]},
+    {"id":"SERVED", "box":[135,505,225,535], "visible":[120,180]}
+  ],
+  "facts": [
+    {"claim":"One consumer serves the first item in this simplified example.", "status":"illustrative", "source":null}
+  ],
+  "review": [
+    {"check":"decoded frame sample", "status":"PASS", "evidence":"decoded frames from final MP4"},
+    {"check":"full playback", "status":"NOT CHECKED", "evidence":null},
+    {"check":"audience comprehension", "status":"NEEDS HUMAN REVIEW", "evidence":null}
+  ]
+}
