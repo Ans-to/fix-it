@@ -1,0 +1,1511 @@
+{
+  "title": "Why is the dollar a world currency?",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "frames": 1800,
+    "status": "PROPOSED; duration is confirmed, platform and format are not",
+    "frame_range": "0-based [start,end)"
+  },
+  "colors": {
+    "night": "#101B2B",
+    "panel": "#1C2D40",
+    "ivory": "#F7F4EC",
+    "muted": "#C3CED7",
+    "gold": "#EAC777",
+    "line": "#96AABB"
+  },
+  "font": {
+    "name": "DejaVu Sans Bold",
+    "tested_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "substitution": "requires re-testing"
+  },
+  "restrictions": [
+    "No photos, footage, images, screenshots, textures, external SVGs, or video inputs.",
+    "Draw only solid rectangles, circles, lines and text; licensed font files allowed.",
+    "All currency symbols, countries and network nodes are illustrative, not exhaustive or data-scaled."
+  ],
+  "contract": {
+    "coordinates": "top-left origin; text and circles use centers, rectangles top-left",
+    "scene_selection": "0-based start inclusive, end exclusive; hard cuts",
+    "entry": "local=frame-scene.start; alpha=smooth((local-delay)/18), smooth(x)=u*u*(3-2*u), u=clamp(x,0,1). No entry translation. If fade_out=[a,b], multiply alpha by 1-smooth((local-a)/(b-a)).",
+    "camera": "All cameras orthographic with yaw/pitch/roll 0. Screen center and zoom anchor (540,960). World points (x,y) map to (540+(x-540)*z,960+(y-960)*z); z=z0+(z1-z0)*smooth(local/(scene_duration-1)). Scale world shapes, text and strokes by z. Heading, subheading and captions are screen-fixed.",
+    "motion": "When move_x is present, x=from+(to-from)*smooth((local-local_start)/(local_end-local_start)) before camera transform. Otherwise the object geometry holds. Token circles and glyphs use the same move_x.",
+    "z_order": "Background, then world objects in listed order, then screen objects in listed order, then captions. Source-over alpha. Network lines are drawn behind nodes.",
+    "captions": "Draft cue ranges are provisional, not synced to speech. Fixed panel (70,1510) size 940×180 radius 22; fill panel. Bold 42 px ivory: one line at (540,1600); two lines at (540,1568) and (540,1635). PLATFORM SAFE AREA NOT VERIFIED. Re-align to final voice, review and add meaningful non-speech captions if needed.",
+    "reproducibility": "Font metrics depend on installed font version; replacement requires review. Round scaled font size and stroke width to nearest pixel."
+  },
+  "scenes": [
+    {
+      "id": "01_question",
+      "start": 0,
+      "end": 180,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1.01
+      },
+      "voiceover": "Why might two countries trade in dollars when neither one issues them?",
+      "purpose": "Show the opening puzzle: two symbolic countries trade using a dollar.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "WHY USE DOLLARS?",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "TWO COUNTRIES. ONE CURRENCY.",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "route",
+          "kind": "line",
+          "x1": 313.0,
+          "y1": 900.0,
+          "x2": 767.0,
+          "y2": 900.0,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "country_a",
+          "kind": "circle",
+          "x": 245,
+          "y": 900,
+          "radius": 70,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "country_b",
+          "kind": "circle",
+          "x": 835,
+          "y": 900,
+          "radius": 70,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "token",
+          "kind": "circle",
+          "x": 540,
+          "y": 900,
+          "radius": 50,
+          "fill": "gold",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6,
+          "move_x": {
+            "from": 365,
+            "to": 715,
+            "local_start": 18,
+            "local_end": 120
+          }
+        },
+        {
+          "id": "dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 900,
+          "size": 66,
+          "color": "night",
+          "group": "world",
+          "delay": 6,
+          "background": "gold",
+          "container": "token",
+          "move_x": {
+            "from": 365,
+            "to": 715,
+            "local_start": 18,
+            "local_end": 120
+          }
+        },
+        {
+          "id": "country_a_label",
+          "kind": "text",
+          "text": "COUNTRY A",
+          "x": 245,
+          "y": 1090,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        },
+        {
+          "id": "country_b_label",
+          "kind": "text",
+          "text": "COUNTRY B",
+          "x": 835,
+          "y": 1090,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        }
+      ],
+      "captions": [
+        {
+          "start": 0,
+          "end": 165,
+          "lines": [
+            "Why might two countries trade in",
+            "dollars when neither one issues"
+          ]
+        },
+        {
+          "start": 165,
+          "end": 180,
+          "lines": [
+            "them?"
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "02_definition",
+      "start": 180,
+      "end": 405,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1
+      },
+      "voiceover": "The dollar is the leading international currency, not the only one. It's widely used for trade invoicing, finance, and reserves.",
+      "purpose": "Give the spoken and visible qualification; the euro and yen are illustrative examples, not an exhaustive list or scaled data.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "LEADING. NOT ONLY.",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "CURRENCIES COEXIST",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "euro_node",
+          "kind": "circle",
+          "x": 260,
+          "y": 810,
+          "radius": 62,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "dollar_node",
+          "kind": "circle",
+          "x": 540,
+          "y": 810,
+          "radius": 78,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "yen_node",
+          "kind": "circle",
+          "x": 820,
+          "y": 810,
+          "radius": 62,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "euro",
+          "kind": "text",
+          "text": "€",
+          "x": 260,
+          "y": 810,
+          "size": 72,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "euro_node"
+        },
+        {
+          "id": "dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 810,
+          "size": 90,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "dollar_node"
+        },
+        {
+          "id": "yen",
+          "kind": "text",
+          "text": "¥",
+          "x": 820,
+          "y": 810,
+          "size": 72,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "yen_node"
+        },
+        {
+          "id": "trade_card",
+          "kind": "rect",
+          "x": 105,
+          "y": 1030,
+          "w": 270,
+          "h": 145,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 12
+        },
+        {
+          "id": "finance_card",
+          "kind": "rect",
+          "x": 405,
+          "y": 1030,
+          "w": 270,
+          "h": 145,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 22
+        },
+        {
+          "id": "reserve_card",
+          "kind": "rect",
+          "x": 705,
+          "y": 1030,
+          "w": 270,
+          "h": 145,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 32
+        },
+        {
+          "id": "trade",
+          "kind": "text",
+          "text": "INVOICING",
+          "x": 240,
+          "y": 1102,
+          "size": 39,
+          "color": "ivory",
+          "group": "world",
+          "delay": 12,
+          "background": "panel",
+          "container": "trade_card"
+        },
+        {
+          "id": "finance",
+          "kind": "text",
+          "text": "FINANCE",
+          "x": 540,
+          "y": 1102,
+          "size": 39,
+          "color": "ivory",
+          "group": "world",
+          "delay": 22,
+          "background": "panel",
+          "container": "finance_card"
+        },
+        {
+          "id": "reserves",
+          "kind": "text",
+          "text": "RESERVES",
+          "x": 840,
+          "y": 1102,
+          "size": 38,
+          "color": "ivory",
+          "group": "world",
+          "delay": 32,
+          "background": "panel",
+          "container": "reserve_card"
+        }
+      ],
+      "captions": [
+        {
+          "start": 180,
+          "end": 281,
+          "lines": [
+            "The dollar is the leading",
+            "international currency, not the"
+          ]
+        },
+        {
+          "start": 281,
+          "end": 394,
+          "lines": [
+            "only one. It's widely used for",
+            "trade invoicing, finance, and"
+          ]
+        },
+        {
+          "start": 394,
+          "end": 405,
+          "lines": [
+            "reserves."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "03_history",
+      "start": 405,
+      "end": 600,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1.01
+      },
+      "voiceover": "In 1944, Bretton Woods placed the dollar at the center of a new postwar monetary system.",
+      "purpose": "Place the 1944 conference within a postwar framework; the dollar also had an earlier international role.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "THE POSTWAR PLAN",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "BRETTON WOODS",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "history_card",
+          "kind": "rect",
+          "x": 150,
+          "y": 760,
+          "w": 780,
+          "h": 310,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "year",
+          "kind": "text",
+          "text": "1944",
+          "x": 540,
+          "y": 885,
+          "size": 150,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "history_card"
+        },
+        {
+          "id": "history_note",
+          "kind": "text",
+          "text": "POSTWAR FRAMEWORK",
+          "x": 540,
+          "y": 1010,
+          "size": 42,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "history_card"
+        }
+      ],
+      "captions": [
+        {
+          "start": 405,
+          "end": 563,
+          "lines": [
+            "In 1944, Bretton Woods placed the",
+            "dollar at the center of a new"
+          ]
+        },
+        {
+          "start": 563,
+          "end": 600,
+          "lines": [
+            "postwar monetary system."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "04_gold",
+      "start": 600,
+      "end": 840,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1
+      },
+      "voiceover": "Participating countries tied their currencies to the dollar. The United States offered gold for dollars held by foreign central banks.",
+      "purpose": "Show currency links while preserving the essential foreign-central-bank qualifier.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "THE GOLD LINK",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "FOREIGN CENTRAL BANKS",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "left_link",
+          "kind": "line",
+          "x1": 355,
+          "y1": 920,
+          "x2": 415,
+          "y2": 920,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "right_link",
+          "kind": "line",
+          "x1": 665,
+          "y1": 920,
+          "x2": 725,
+          "y2": 920,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "other_box",
+          "kind": "rect",
+          "x": 100,
+          "y": 830,
+          "w": 255,
+          "h": 180,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "dollar_box",
+          "kind": "rect",
+          "x": 415,
+          "y": 830,
+          "w": 250,
+          "h": 180,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "gold_box",
+          "kind": "rect",
+          "x": 725,
+          "y": 830,
+          "w": 255,
+          "h": 180,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "other_first",
+          "kind": "text",
+          "text": "OTHER",
+          "x": 227,
+          "y": 895,
+          "size": 40,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "other_box"
+        },
+        {
+          "id": "other_second",
+          "kind": "text",
+          "text": "MONEY",
+          "x": 227,
+          "y": 950,
+          "size": 40,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "other_box"
+        },
+        {
+          "id": "usd",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 920,
+          "size": 85,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "dollar_box"
+        },
+        {
+          "id": "gold",
+          "kind": "text",
+          "text": "GOLD",
+          "x": 852,
+          "y": 920,
+          "size": 43,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "gold_box"
+        },
+        {
+          "id": "qualifier",
+          "kind": "text",
+          "text": "FOREIGN CENTRAL BANKS",
+          "x": 540,
+          "y": 1190,
+          "size": 42,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        }
+      ],
+      "captions": [
+        {
+          "start": 600,
+          "end": 708,
+          "lines": [
+            "Participating countries tied their",
+            "currencies to the dollar. The"
+          ]
+        },
+        {
+          "start": 708,
+          "end": 828,
+          "lines": [
+            "United States offered gold for",
+            "dollars held by foreign central"
+          ]
+        },
+        {
+          "start": 828,
+          "end": 840,
+          "lines": [
+            "banks."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "05_suspension",
+      "start": 840,
+      "end": 1050,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1.01
+      },
+      "voiceover": "In 1971, the United States suspended gold conversion. The dollar's international role continued after the system changed.",
+      "purpose": "Fade the gold-conversion link without claiming the entire Bretton Woods system ended in one day.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "CONVERSION",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "SUSPENDED IN 1971",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "left_link",
+          "kind": "line",
+          "x1": 390,
+          "y1": 910,
+          "x2": 490,
+          "y2": 910,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "middle_link",
+          "kind": "line",
+          "x1": 490,
+          "y1": 910,
+          "x2": 590,
+          "y2": 910,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6,
+          "fade_out": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "right_link",
+          "kind": "line",
+          "x1": 590,
+          "y1": 910,
+          "x2": 690,
+          "y2": 910,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "dollar_box",
+          "kind": "rect",
+          "x": 140,
+          "y": 820,
+          "w": 250,
+          "h": 180,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "gold_box",
+          "kind": "rect",
+          "x": 690,
+          "y": 820,
+          "w": 250,
+          "h": 180,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 265,
+          "y": 910,
+          "size": 85,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "dollar_box"
+        },
+        {
+          "id": "gold",
+          "kind": "text",
+          "text": "GOLD",
+          "x": 815,
+          "y": 910,
+          "size": 43,
+          "color": "gold",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "gold_box"
+        },
+        {
+          "id": "status",
+          "kind": "text",
+          "text": "OFFICIAL CONVERSION SUSPENDED",
+          "x": 540,
+          "y": 1185,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        }
+      ],
+      "captions": [
+        {
+          "start": 840,
+          "end": 951,
+          "lines": [
+            "In 1971, the United States",
+            "suspended gold conversion. The"
+          ]
+        },
+        {
+          "start": 951,
+          "end": 1038,
+          "lines": [
+            "dollar's international role",
+            "continued after the system"
+          ]
+        },
+        {
+          "start": 1038,
+          "end": 1050,
+          "lines": [
+            "changed."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "06_economy",
+      "start": 1050,
+      "end": 1290,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1
+      },
+      "voiceover": "A large U.S. economy and deep Treasury markets support the dollar, while widespread trade invoicing gives people reasons to use it.",
+      "purpose": "State the supporting factors without numerical or causal overclaim.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "WHY IT CONTINUED",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "SCALE + LIQUID MARKETS",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "economy_card",
+          "kind": "rect",
+          "x": 140,
+          "y": 735,
+          "w": 800,
+          "h": 140,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "market_card",
+          "kind": "rect",
+          "x": 140,
+          "y": 920,
+          "w": 800,
+          "h": 140,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 20
+        },
+        {
+          "id": "trade_card",
+          "kind": "rect",
+          "x": 140,
+          "y": 1105,
+          "w": 800,
+          "h": 140,
+          "radius": 22,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 34
+        },
+        {
+          "id": "economy",
+          "kind": "text",
+          "text": "LARGE U.S. ECONOMY",
+          "x": 540,
+          "y": 805,
+          "size": 43,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "panel",
+          "container": "economy_card"
+        },
+        {
+          "id": "market",
+          "kind": "text",
+          "text": "DEEP TREASURY MARKETS",
+          "x": 540,
+          "y": 990,
+          "size": 43,
+          "color": "gold",
+          "group": "world",
+          "delay": 20,
+          "background": "panel",
+          "container": "market_card"
+        },
+        {
+          "id": "trade",
+          "kind": "text",
+          "text": "TRADE INVOICING",
+          "x": 540,
+          "y": 1175,
+          "size": 43,
+          "color": "ivory",
+          "group": "world",
+          "delay": 34,
+          "background": "panel",
+          "container": "trade_card"
+        }
+      ],
+      "captions": [
+        {
+          "start": 1050,
+          "end": 1164,
+          "lines": [
+            "A large U.S. economy and deep",
+            "Treasury markets support the"
+          ]
+        },
+        {
+          "start": 1164,
+          "end": 1267,
+          "lines": [
+            "dollar, while widespread trade",
+            "invoicing gives people reasons to"
+          ]
+        },
+        {
+          "start": 1267,
+          "end": 1290,
+          "lines": [
+            "use it."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "07_network",
+      "start": 1290,
+      "end": 1530,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1.01
+      },
+      "voiceover": "As more people use dollars, others may find them easier to use. That network effect can reinforce the dollar's role.",
+      "purpose": "First show two connected participants; then reveal a new user and two new links. The animation illustrates a mechanism, not data or causal proof.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "USE REINFORCES USE",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "AN ILLUSTRATIVE MODEL",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "hub_left",
+          "kind": "line",
+          "x1": 475.27,
+          "y1": 818.52,
+          "x2": 293.15,
+          "y2": 940.98,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 16
+        },
+        {
+          "id": "hub_right",
+          "kind": "line",
+          "x1": 604.73,
+          "y1": 818.52,
+          "x2": 786.85,
+          "y2": 940.98,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 16
+        },
+        {
+          "id": "existing_peers",
+          "kind": "line",
+          "x1": 302.0,
+          "y1": 970.0,
+          "x2": 778.0,
+          "y2": 970.0,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 26
+        },
+        {
+          "id": "new_to_left",
+          "kind": "line",
+          "x1": 497.88,
+          "y1": 1149.5,
+          "x2": 292.12,
+          "y2": 1000.5,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 96
+        },
+        {
+          "id": "new_to_right",
+          "kind": "line",
+          "x1": 582.12,
+          "y1": 1149.5,
+          "x2": 787.88,
+          "y2": 1000.5,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 96
+        },
+        {
+          "id": "new_to_hub",
+          "kind": "line",
+          "x1": 540.0,
+          "y1": 853.0,
+          "x2": 540.0,
+          "y2": 1128.0,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 96
+        },
+        {
+          "id": "hub",
+          "kind": "circle",
+          "x": 540,
+          "y": 775,
+          "radius": 80,
+          "fill": "gold",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "hub_dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 775,
+          "size": 92,
+          "color": "night",
+          "group": "world",
+          "delay": 6,
+          "background": "gold",
+          "container": "hub"
+        },
+        {
+          "id": "left_node",
+          "kind": "circle",
+          "x": 250,
+          "y": 970,
+          "radius": 54,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 16
+        },
+        {
+          "id": "right_node",
+          "kind": "circle",
+          "x": 830,
+          "y": 970,
+          "radius": 54,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 16
+        },
+        {
+          "id": "new_node",
+          "kind": "circle",
+          "x": 540,
+          "y": 1180,
+          "radius": 54,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 96
+        },
+        {
+          "id": "bank_label",
+          "kind": "text",
+          "text": "BANKS",
+          "x": 250,
+          "y": 1080,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 16,
+          "background": "night"
+        },
+        {
+          "id": "business_label",
+          "kind": "text",
+          "text": "BUSINESSES",
+          "x": 830,
+          "y": 1080,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 16,
+          "background": "night"
+        },
+        {
+          "id": "new_label",
+          "kind": "text",
+          "text": "NEW USER",
+          "x": 540,
+          "y": 1290,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 96,
+          "background": "night"
+        },
+        {
+          "id": "model_note",
+          "kind": "text",
+          "text": "USE CAN GET EASIER",
+          "x": 540,
+          "y": 1380,
+          "size": 44,
+          "color": "ivory",
+          "group": "world",
+          "delay": 110,
+          "background": "night"
+        }
+      ],
+      "captions": [
+        {
+          "start": 1290,
+          "end": 1422,
+          "lines": [
+            "As more people use dollars,",
+            "others may find them easier to"
+          ]
+        },
+        {
+          "start": 1422,
+          "end": 1530,
+          "lines": [
+            "use. That network effect can",
+            "reinforce the dollar's role."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    },
+    {
+      "id": "08_answer",
+      "start": 1530,
+      "end": 1800,
+      "camera": {
+        "projection": "orthographic",
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "screen_center": [
+          540,
+          960
+        ],
+        "zoom_anchor": [
+          540,
+          960
+        ],
+        "zoom_start": 1,
+        "zoom_end": 1
+      },
+      "voiceover": "So those two countries can choose dollars because they already have access to a widely used system. Other currencies can work too.",
+      "purpose": "Return to the same two parties and directly answer the opening; retain non-exclusivity.",
+      "objects": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "WHY THEY CHOOSE $",
+          "x": 540,
+          "y": 320,
+          "size": 66,
+          "color": "ivory",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "COMMON ACCESS, NOT A RULE",
+          "x": 540,
+          "y": 430,
+          "size": 40,
+          "color": "muted",
+          "group": "screen",
+          "delay": 0,
+          "background": "night"
+        },
+        {
+          "id": "route",
+          "kind": "line",
+          "x1": 313.0,
+          "y1": 900.0,
+          "x2": 767.0,
+          "y2": 900.0,
+          "color": "line",
+          "stroke_width": 4,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "country_a",
+          "kind": "circle",
+          "x": 245,
+          "y": 900,
+          "radius": 70,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "country_b",
+          "kind": "circle",
+          "x": 835,
+          "y": 900,
+          "radius": 70,
+          "fill": "panel",
+          "stroke": "line",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "token",
+          "kind": "circle",
+          "x": 715,
+          "y": 900,
+          "radius": 50,
+          "fill": "gold",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "world",
+          "delay": 6
+        },
+        {
+          "id": "dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 715,
+          "y": 900,
+          "size": 66,
+          "color": "night",
+          "group": "world",
+          "delay": 6,
+          "background": "gold",
+          "container": "token"
+        },
+        {
+          "id": "country_a_label",
+          "kind": "text",
+          "text": "COUNTRY A",
+          "x": 245,
+          "y": 1090,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        },
+        {
+          "id": "country_b_label",
+          "kind": "text",
+          "text": "COUNTRY B",
+          "x": 835,
+          "y": 1090,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        },
+        {
+          "id": "answer",
+          "kind": "text",
+          "text": "BOTH CAN USE ONE SYSTEM",
+          "x": 540,
+          "y": 1240,
+          "size": 43,
+          "color": "ivory",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        },
+        {
+          "id": "other",
+          "kind": "text",
+          "text": "OTHER CURRENCIES CAN WORK TOO",
+          "x": 540,
+          "y": 1330,
+          "size": 40,
+          "color": "muted",
+          "group": "world",
+          "delay": 6,
+          "background": "night"
+        }
+      ],
+      "captions": [
+        {
+          "start": 1530,
+          "end": 1665,
+          "lines": [
+            "So those two countries can choose",
+            "dollars because they already have"
+          ]
+        },
+        {
+          "start": 1665,
+          "end": 1800,
+          "lines": [
+            "access to a widely used system.",
+            "Other currencies can work too."
+          ]
+        }
+      ],
+      "caption_status": "PROVISIONAL: approximate visual-time pages, not aligned to recorded audio"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "frames_checked": 1800,
+  "selected_geometry_issues": 0,
+  "estimated_word_tokens": 149,
+  "estimated_tokens_per_minute": {
+    "01_question": 120.0,
+    "02_definition": 160.0,
+    "03_history": 147.7,
+    "04_gold": 150.0,
+    "05_suspension": 145.7,
+    "06_economy": 165.0,
+    "07_network": 150.0,
+    "08_answer": 146.7
+  },
+  "nominal_text_background_pairs": {
+    "gold on panel": 8.63,
+    "ivory on night": 15.74,
+    "ivory on panel": 12.75,
+    "muted on night": 10.82,
+    "muted on panel": 8.76,
+    "night on gold": 10.66
+  },
+  "preview_frames": [
+    90,
+    292,
+    502,
+    720,
+    945,
+    1170,
+    1410,
+    1665
+  ],
+  "json_file_sha256": "6fa1669bcf041b3cfb268f695ddd740ee46669b961f72d5b951f238b233a15f3",
+  "limitations": [
+    "No finished video or full-motion playback",
+    "No recorded VO or caption synchronization",
+    "No independent audience or subject-matter review",
+    "No platform overlay or phone-device testing",
+    "Not an all-object collision check",
+    "Contrast calculated for declared fully opaque text/background pairs, not animated composited states"
+  ]
+}
