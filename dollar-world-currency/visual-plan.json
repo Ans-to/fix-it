@@ -1,0 +1,1315 @@
+{
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "frame_count": 1800,
+    "duration_seconds": 60,
+    "status": "PROPOSED: format and fps not supplied by user",
+    "frame_convention": "0-based; start-inclusive, end-exclusive"
+  },
+  "restrictions": {
+    "external_images": false,
+    "external_video": false,
+    "generated_raster_inputs": false,
+    "visuals": "Only text, solid fills, outlines, lines, circles and rounded rectangles drawn in code. Font files allowed. No photographic image, bitmap, stock footage, external SVG, image model, texture or bitmap overlay."
+  },
+  "palette": {
+    "background": "#101C2D",
+    "panel": "#1B2D40",
+    "ink": "#F7F4ED",
+    "muted": "#BBC9D5",
+    "gold": "#EEC86B"
+  },
+  "typography": {
+    "regular": "DejaVu Sans",
+    "bold": "DejaVu Sans Bold",
+    "anchor": "centered at x,y",
+    "source": "local installed font or properly licensed packaged equivalent; freeze version and verify metrics"
+  },
+  "render_contract": {
+    "origin": "top-left",
+    "scene_cut": "hard cut at scene start; no overlap",
+    "background": "solid #101C2D, full frame, all 1800 frames",
+    "ease": "E(t)=u*u*(3-2*u), u=clamp(t,0,1)",
+    "intro": "For local scene frame s, heading group d=0 and graphic group d=6 unless the primitive supplies delay. entry=E((s-d)/18); y_offset=40*(1-entry). alpha=entry unless fade_out is provided, in which case alpha=entry*(1-E((s-fade_out.start_local_frame)/(fade_out.end_local_frame-fade_out.start_local_frame))). Other values hold after interpolation. On-screen elements use these rules unless specified.",
+    "camera": "For s in [0,duration-1], q=E(s/(duration-1)); zoom=start_zoom+(end_zoom-start_zoom)*q. Apply to graphic group only about world/screen center (540,990). Heading and caption layer remain fixed to screen; camera is orthographic, 0-degree pitch/roll/yaw, no perspective.",
+    "motion": "For optional x motion, v=start+(end-start)*E((s-start_local_frame)/(end_local_frame-start_local_frame)); x follows v. Other coordinates constant before intro/camera.",
+    "z_order": [
+      "background",
+      "graphic primitives in listed order",
+      "heading primitives",
+      "captions"
+    ],
+    "captions": "Draft captions use the scene caption_cues, start-inclusive and end-exclusive. On every frame, draw a screen-fixed rounded rectangle x=70, y=1510, w=940, h=180, radius=24, panel fill, then centered ink text at (540,1568) and, when present, (540,1635), DejaVu Sans Bold 42 px. Caption timings are provisional; re-align to the final recording and add meaningful non-speech sounds if needed. This area is not a verified platform-safe zone.",
+    "outro": "No fades at scene ends. Each scene hard-cuts at end_frame_exclusive."
+  },
+  "scenes": [
+    {
+      "name": "The question",
+      "start_frame": 0,
+      "end_frame_exclusive": 180,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.02
+      },
+      "voiceover": "Why does the world reach for dollars, even when the United States isn't in the deal?",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "WHY THE DOLLAR?",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "WHEN NEITHER SIDE IS IN THE U.S.",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "buyer",
+          "kind": "circle",
+          "x": 250,
+          "y": 925,
+          "radius": 72,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "seller",
+          "kind": "circle",
+          "x": 830,
+          "y": 925,
+          "radius": 72,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "left link",
+          "kind": "line",
+          "x1": 330,
+          "y1": 925,
+          "x2": 445,
+          "y2": 925,
+          "color": "muted",
+          "width": 4,
+          "group": "graphic"
+        },
+        {
+          "id": "right link",
+          "kind": "line",
+          "x1": 635,
+          "y1": 925,
+          "x2": 750,
+          "y2": 925,
+          "color": "muted",
+          "width": 4,
+          "group": "graphic"
+        },
+        {
+          "id": "transfer",
+          "kind": "circle",
+          "x": 540,
+          "y": 925,
+          "radius": 70,
+          "fill": "gold",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "graphic",
+          "motion": {
+            "type": "x",
+            "start": 490,
+            "end": 590,
+            "start_local_frame": 20,
+            "end_local_frame": 110
+          }
+        },
+        {
+          "id": "dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 925,
+          "size": 84,
+          "color": "background",
+          "group": "graphic",
+          "weight": "bold",
+          "motion": {
+            "type": "x",
+            "start": 490,
+            "end": 590,
+            "start_local_frame": 20,
+            "end_local_frame": 110
+          }
+        },
+        {
+          "id": "buyer label",
+          "kind": "text",
+          "text": "BUYER",
+          "x": 250,
+          "y": 1100,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "seller label",
+          "kind": "text",
+          "text": "SELLER",
+          "x": 830,
+          "y": 1100,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 0,
+          "end_frame_exclusive": 90,
+          "lines": [
+            "Why does the world",
+            "reach for dollars,"
+          ]
+        },
+        {
+          "start_frame": 90,
+          "end_frame_exclusive": 180,
+          "lines": [
+            "even when the United States",
+            "isn't in the deal?"
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "What world currency means",
+      "start_frame": 180,
+      "end_frame_exclusive": 390,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.0
+      },
+      "voiceover": "The dollar isn't the world's only currency. It's the leading currency for trade, finance, and official reserves.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "THE LEADING CHOICE",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "NOT THE ONLY CURRENCY",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "dollar sign",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 790,
+          "size": 150,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "trade card",
+          "kind": "rect",
+          "x": 125,
+          "y": 990,
+          "w": 250,
+          "h": 150,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic",
+          "delay": 12
+        },
+        {
+          "id": "finance card",
+          "kind": "rect",
+          "x": 415,
+          "y": 990,
+          "w": 250,
+          "h": 150,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic",
+          "delay": 22
+        },
+        {
+          "id": "reserves card",
+          "kind": "rect",
+          "x": 705,
+          "y": 990,
+          "w": 250,
+          "h": 150,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic",
+          "delay": 32
+        },
+        {
+          "id": "trade",
+          "kind": "text",
+          "text": "TRADE",
+          "x": 250,
+          "y": 1065,
+          "size": 40,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 12
+        },
+        {
+          "id": "finance",
+          "kind": "text",
+          "text": "FINANCE",
+          "x": 540,
+          "y": 1065,
+          "size": 40,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 22
+        },
+        {
+          "id": "reserves",
+          "kind": "text",
+          "text": "RESERVES",
+          "x": 830,
+          "y": 1065,
+          "size": 38,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 32
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 180,
+          "end_frame_exclusive": 285,
+          "lines": [
+            "The dollar isn't the world's",
+            "only currency."
+          ]
+        },
+        {
+          "start_frame": 285,
+          "end_frame_exclusive": 390,
+          "lines": [
+            "It's the leading currency for",
+            "trade, finance, and official reserves."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "Postwar start",
+      "start_frame": 390,
+      "end_frame_exclusive": 600,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.025
+      },
+      "voiceover": "In 1944, Bretton Woods placed the dollar at the center of the postwar monetary system.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "A POSTWAR SYSTEM",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "BRETTON WOODS",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "year frame",
+          "kind": "rect",
+          "x": 175,
+          "y": 805,
+          "w": 730,
+          "h": 280,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 32,
+          "group": "graphic"
+        },
+        {
+          "id": "year",
+          "kind": "text",
+          "text": "1944",
+          "x": 540,
+          "y": 920,
+          "size": 150,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "history caption",
+          "kind": "text",
+          "text": "POSTWAR FRAMEWORK",
+          "x": 540,
+          "y": 1040,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 390,
+          "end_frame_exclusive": 495,
+          "lines": [
+            "In 1944, Bretton Woods placed",
+            "the dollar at the center"
+          ]
+        },
+        {
+          "start_frame": 495,
+          "end_frame_exclusive": 600,
+          "lines": [
+            "of the postwar",
+            "monetary system."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "The gold link",
+      "start_frame": 600,
+      "end_frame_exclusive": 825,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.0
+      },
+      "voiceover": "Participating countries linked currencies to the dollar, while the U.S. linked the dollar to gold for foreign central banks.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "HOW IT WORKED",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "THE BRETTON WOODS SYSTEM",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "currencies box",
+          "kind": "rect",
+          "x": 100,
+          "y": 840,
+          "w": 260,
+          "h": 190,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "usd box",
+          "kind": "rect",
+          "x": 410,
+          "y": 840,
+          "w": 260,
+          "h": 190,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "gold box",
+          "kind": "rect",
+          "x": 720,
+          "y": 840,
+          "w": 260,
+          "h": 190,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "currencies line 1",
+          "kind": "text",
+          "text": "OTHER",
+          "x": 230,
+          "y": 910,
+          "size": 40,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "currencies line 2",
+          "kind": "text",
+          "text": "MONEY",
+          "x": 230,
+          "y": 965,
+          "size": 40,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "usd",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 935,
+          "size": 92,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "gold",
+          "kind": "text",
+          "text": "GOLD",
+          "x": 850,
+          "y": 935,
+          "size": 42,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "link a",
+          "kind": "line",
+          "x1": 365,
+          "y1": 935,
+          "x2": 405,
+          "y2": 935,
+          "color": "muted",
+          "width": 5,
+          "group": "graphic"
+        },
+        {
+          "id": "link b",
+          "kind": "line",
+          "x1": 675,
+          "y1": 935,
+          "x2": 715,
+          "y2": 935,
+          "color": "muted",
+          "width": 5,
+          "group": "graphic"
+        },
+        {
+          "id": "official qualifier",
+          "kind": "text",
+          "text": "FOR MONETARY AUTHORITIES",
+          "x": 540,
+          "y": 1200,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 600,
+          "end_frame_exclusive": 712,
+          "lines": [
+            "Participating countries linked",
+            "currencies to the dollar,"
+          ]
+        },
+        {
+          "start_frame": 712,
+          "end_frame_exclusive": 825,
+          "lines": [
+            "while the U.S. linked the dollar",
+            "to gold for foreign central banks."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "The 1971 break",
+      "start_frame": 825,
+      "end_frame_exclusive": 1050,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.025
+      },
+      "voiceover": "In 1971, the U.S. suspended that gold conversion. The dollar's international role, however, did not disappear.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "THE GOLD LINK ENDS",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "1971",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "usd panel",
+          "kind": "rect",
+          "x": 150,
+          "y": 830,
+          "w": 250,
+          "h": 180,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "gold panel",
+          "kind": "rect",
+          "x": 680,
+          "y": 830,
+          "w": 250,
+          "h": 180,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "usd symbol",
+          "kind": "text",
+          "text": "$",
+          "x": 275,
+          "y": 920,
+          "size": 90,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "gold word",
+          "kind": "text",
+          "text": "GOLD",
+          "x": 805,
+          "y": 920,
+          "size": 43,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "broken left",
+          "kind": "line",
+          "x1": 410,
+          "y1": 920,
+          "x2": 493,
+          "y2": 920,
+          "color": "muted",
+          "width": 5,
+          "group": "graphic"
+        },
+        {
+          "id": "broken right",
+          "kind": "line",
+          "x1": 587,
+          "y1": 920,
+          "x2": 670,
+          "y2": 920,
+          "color": "muted",
+          "width": 5,
+          "group": "graphic"
+        },
+        {
+          "id": "center link",
+          "kind": "line",
+          "x1": 493,
+          "y1": 920,
+          "x2": 587,
+          "y2": 920,
+          "color": "muted",
+          "width": 5,
+          "group": "graphic",
+          "fade_out": {
+            "start_local_frame": 38,
+            "end_local_frame": 56
+          }
+        },
+        {
+          "id": "conversion status",
+          "kind": "text",
+          "text": "CONVERSION SUSPENDED",
+          "x": 540,
+          "y": 1190,
+          "size": 40,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 825,
+          "end_frame_exclusive": 937,
+          "lines": [
+            "In 1971, the U.S. suspended",
+            "that gold conversion."
+          ]
+        },
+        {
+          "start_frame": 937,
+          "end_frame_exclusive": 1050,
+          "lines": [
+            "The dollar's international role,",
+            "however, did not disappear."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "Markets and use",
+      "start_frame": 1050,
+      "end_frame_exclusive": 1275,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.0
+      },
+      "voiceover": "The U.S. economy was large, businesses kept using dollars, and investors could trade U.S. Treasuries in deep markets.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "WHY IT STAYED",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "USE AND LIQUID MARKETS",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "trade panel",
+          "kind": "rect",
+          "x": 140,
+          "y": 805,
+          "w": 800,
+          "h": 150,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "treasury panel",
+          "kind": "rect",
+          "x": 140,
+          "y": 1000,
+          "w": 800,
+          "h": 150,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "radius": 24,
+          "group": "graphic"
+        },
+        {
+          "id": "trade words",
+          "kind": "text",
+          "text": "DOLLAR TRADE",
+          "x": 540,
+          "y": 880,
+          "size": 45,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "treasury words",
+          "kind": "text",
+          "text": "U.S. TREASURIES",
+          "x": 540,
+          "y": 1075,
+          "size": 45,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "market note",
+          "kind": "text",
+          "text": "DEEP MARKETS",
+          "x": 540,
+          "y": 1250,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 1050,
+          "end_frame_exclusive": 1162,
+          "lines": [
+            "The U.S. economy was large,",
+            "businesses kept using dollars,"
+          ]
+        },
+        {
+          "start_frame": 1162,
+          "end_frame_exclusive": 1275,
+          "lines": [
+            "and investors could trade U.S.",
+            "Treasuries in deep markets."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "Network effect",
+      "start_frame": 1275,
+      "end_frame_exclusive": 1485,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.025
+      },
+      "voiceover": "That creates a network effect: the more widely a currency is used, the more useful it can become.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "THE NETWORK EFFECT",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "USE REINFORCES USE",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "left link",
+          "kind": "line",
+          "x1": 305,
+          "y1": 1030,
+          "x2": 470,
+          "y2": 920,
+          "color": "muted",
+          "width": 4,
+          "group": "graphic",
+          "delay": 18
+        },
+        {
+          "id": "right link",
+          "kind": "line",
+          "x1": 775,
+          "y1": 1030,
+          "x2": 610,
+          "y2": 920,
+          "color": "muted",
+          "width": 4,
+          "group": "graphic",
+          "delay": 32
+        },
+        {
+          "id": "bottom link",
+          "kind": "line",
+          "x1": 540,
+          "y1": 1140,
+          "x2": 540,
+          "y2": 1000,
+          "color": "muted",
+          "width": 4,
+          "group": "graphic",
+          "delay": 46
+        },
+        {
+          "id": "hub",
+          "kind": "circle",
+          "x": 540,
+          "y": 900,
+          "radius": 92,
+          "fill": "gold",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "hub dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 900,
+          "size": 105,
+          "color": "background",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "node left",
+          "kind": "circle",
+          "x": 250,
+          "y": 1065,
+          "radius": 50,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic",
+          "delay": 18
+        },
+        {
+          "id": "node right",
+          "kind": "circle",
+          "x": 830,
+          "y": 1065,
+          "radius": 50,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic",
+          "delay": 32
+        },
+        {
+          "id": "node bottom",
+          "kind": "circle",
+          "x": 540,
+          "y": 1200,
+          "radius": 50,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic",
+          "delay": 46
+        },
+        {
+          "id": "left network label",
+          "kind": "text",
+          "text": "BUYERS",
+          "x": 250,
+          "y": 1170,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 18
+        },
+        {
+          "id": "right network label",
+          "kind": "text",
+          "text": "SELLERS",
+          "x": 830,
+          "y": 1170,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 32
+        },
+        {
+          "id": "bottom network label",
+          "kind": "text",
+          "text": "INVESTORS",
+          "x": 540,
+          "y": 1305,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold",
+          "delay": 46
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 1275,
+          "end_frame_exclusive": 1380,
+          "lines": [
+            "That creates a network effect:",
+            "the more widely a currency is used,"
+          ]
+        },
+        {
+          "start_frame": 1380,
+          "end_frame_exclusive": 1485,
+          "lines": [
+            "the more useful",
+            "it can become."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "Other currencies",
+      "start_frame": 1485,
+      "end_frame_exclusive": 1650,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.0
+      },
+      "voiceover": "Other currencies matter too, and the dollar's lead isn't guaranteed forever.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "NOT THE ONLY ONE",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "THE LEAD CAN CHANGE",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "euro circle",
+          "kind": "circle",
+          "x": 250,
+          "y": 950,
+          "radius": 95,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "dollar circle",
+          "kind": "circle",
+          "x": 540,
+          "y": 950,
+          "radius": 105,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "yen circle",
+          "kind": "circle",
+          "x": 830,
+          "y": 950,
+          "radius": 95,
+          "fill": "panel",
+          "stroke": "muted",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "euro symbol",
+          "kind": "text",
+          "text": "€",
+          "x": 250,
+          "y": 950,
+          "size": 90,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "dollar symbol",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 950,
+          "size": 110,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "yen symbol",
+          "kind": "text",
+          "text": "¥",
+          "x": 830,
+          "y": 950,
+          "size": 90,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "other note",
+          "kind": "text",
+          "text": "CURRENCIES COEXIST",
+          "x": 540,
+          "y": 1200,
+          "size": 40,
+          "color": "muted",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 1485,
+          "end_frame_exclusive": 1567,
+          "lines": [
+            "Other currencies matter too,",
+            "and the dollar's lead"
+          ]
+        },
+        {
+          "start_frame": 1567,
+          "end_frame_exclusive": 1650,
+          "lines": [
+            "isn't guaranteed forever."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    },
+    {
+      "name": "Payoff",
+      "start_frame": 1650,
+      "end_frame_exclusive": 1800,
+      "camera": {
+        "type": "orthographic",
+        "view": "front-on, 0° tilt and 0° rotation",
+        "center": [
+          540,
+          990
+        ],
+        "start_zoom": 1.0,
+        "end_zoom": 1.02
+      },
+      "voiceover": "It's not the world's only money. It's the system many already use.",
+      "primitives": [
+        {
+          "id": "heading",
+          "kind": "text",
+          "text": "HISTORY + USE",
+          "x": 540,
+          "y": 345,
+          "size": 66,
+          "color": "ink",
+          "group": "heading",
+          "weight": "bold"
+        },
+        {
+          "id": "subheading",
+          "kind": "text",
+          "text": "REINFORCE THE DOLLAR’S ROLE",
+          "x": 540,
+          "y": 455,
+          "size": 40,
+          "color": "muted",
+          "group": "heading",
+          "weight": "regular"
+        },
+        {
+          "id": "final ring",
+          "kind": "circle",
+          "x": 540,
+          "y": 920,
+          "radius": 135,
+          "fill": "panel",
+          "stroke": "gold",
+          "stroke_width": 3,
+          "group": "graphic"
+        },
+        {
+          "id": "final dollar",
+          "kind": "text",
+          "text": "$",
+          "x": 540,
+          "y": 920,
+          "size": 155,
+          "color": "gold",
+          "group": "graphic",
+          "weight": "bold"
+        },
+        {
+          "id": "final line",
+          "kind": "text",
+          "text": "A COMMON GLOBAL CHOICE",
+          "x": 540,
+          "y": 1210,
+          "size": 42,
+          "color": "ink",
+          "group": "graphic",
+          "weight": "bold"
+        }
+      ],
+      "caption_cues": [
+        {
+          "start_frame": 1650,
+          "end_frame_exclusive": 1725,
+          "lines": [
+            "It's not the world's only money."
+          ]
+        },
+        {
+          "start_frame": 1725,
+          "end_frame_exclusive": 1800,
+          "lines": [
+            "It's the system",
+            "many already use."
+          ]
+        }
+      ],
+      "caption_timing_status": "PROVISIONAL: scene-based draft, must align to final voice recording"
+    }
+  ]
+}
