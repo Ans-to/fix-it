@@ -16,6 +16,8 @@ export type CinematicWordProps = {
   seed?: string;
   shakePixels?: number;
   textStyle?: CSSProperties;
+  /** Palette-safe impact styling for the minimalist cyber-editorial scene. */
+  accentMode?: 'default' | 'lime';
 };
 
 /**
@@ -34,6 +36,7 @@ export const CinematicWord: React.FC<CinematicWordProps> = ({
   seed = 'cinematic-word',
   shakePixels = 14,
   textStyle,
+  accentMode = 'default',
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -86,8 +89,9 @@ export const CinematicWord: React.FC<CinematicWordProps> = ({
                 overflowWrap: 'anywhere',
                 ...textStyle,
                 transform: `translate3d(0, ${rise}px, 0) scale(${scale})`,
-                textShadow:
-                  '-5px 0 0 rgba(255,55,85,0.85), 0 -1px 0 rgba(118,255,92,0.9), 5px 0 0 rgba(58,132,255,0.85), 0 0 14px rgba(181,255,100,0.95), 0 0 36px rgba(122,255,104,0.65)',
+                textShadow: accentMode === 'lime'
+                  ? '-3px 0 0 rgba(255,255,255,0.65), 3px 0 0 rgba(210,255,82,0.9), 0 0 22px rgba(210,255,82,0.9), 0 0 70px rgba(210,255,82,0.65)'
+                  : '-5px 0 0 rgba(255,55,85,0.85), 0 -1px 0 rgba(118,255,92,0.9), 5px 0 0 rgba(58,132,255,0.85), 0 0 14px rgba(181,255,100,0.95), 0 0 36px rgba(122,255,104,0.65)',
               }}
             >
               {text}
@@ -98,7 +102,7 @@ export const CinematicWord: React.FC<CinematicWordProps> = ({
       {elapsed === 0 && (
         <AbsoluteFill
           aria-hidden="true"
-          style={{backgroundColor: '#f7fff1', opacity: 0.3, pointerEvents: 'none'}}
+          style={{backgroundColor: accentMode === 'lime' ? '#FFFFFF' : '#f7fff1', opacity: accentMode === 'lime' ? 0.16 : 0.3, pointerEvents: 'none'}}
         />
       )}
       {playImpactSound && impactSoundSrc && (

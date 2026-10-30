@@ -1,6 +1,6 @@
 # Cinematic tech commercial — scene 1 prototype
 
-The approved storyboard is `storyboard.json`. **Scene 1 is a silent visual prototype**, not the completed commercial. Scene 1 uses frame-driven 3D markers, a moving USD token, camera motion, kinetic type, and the reusable atmosphere and impact components. A/B are illustrative, not representations of a particular country or transaction.
+The approved storyboard is `storyboard.json`. **Scene 1 is a silent visual prototype**, not the completed commercial. Scene 1 uses glowing circular HUD terminals, a moving wireframe USD token, camera motion, kinetic type, and a restrained black, neon-lime, white and HUD-gray palette. NODE A and NODE B are illustrative, not representations of a particular country or transaction.
 
 ## Preview
 
@@ -11,7 +11,7 @@ npm run dev
 
 Open the displayed Vite URL to review the Remotion Player. Use the player controls or the cue buttons to seek. `npm run studio` also opens the `Scene1Prototype` composition in Remotion Studio. The current preview proposes 1080×1920 and uses the requested 30 fps; it runs for the approved scene's 4.7 seconds (141 frames). Output format is a prototype assumption, not an approved delivery specification.
 
-`src/config/mockTimings.ts` contains **estimated** scene-relative word cues: they are not derived from a recording, and must be replaced before audio synchronization. At frame 86, “NEITHER” triggers the word component's spring, five-frame deterministic shake, chromatic text and one-frame flash. All timing remains provisional.
+`src/config/mockTimings.ts` contains **estimated** scene-relative word cues: they are not derived from a recording, and must be replaced before audio synchronization. At frame 86, “NEITHER” triggers the word component's spring, five-frame deterministic shake, white/lime offset glow and a one-frame flash. All timing remains provisional.
 
 ## Audio and integration
 
@@ -21,6 +21,6 @@ The earlier real-audio implementation is retained as `ProductionAudioTrack` in `
 
 ## Checks
 
-`npm run typecheck`, `npm run test:audio`, `npm run test:mock`, and `npm run build:preview` validate types, silent-placeholder behavior, mock timing order, audio gain math, and the preview bundle. The preview was exercised with software WebGL, including playback and seeking. Selected frames were inspected; creative quality, full real-time visual review, platform placement and all audio remain for human review. No finished video export is claimed.
+`npm run typecheck`, `npm run test:audio`, `npm run test:mock`, `npm run test:aesthetic`, and `npm run build:preview` validate types, silent-placeholder behavior, mock timing order, palette source constraints, audio gain math, and the preview bundle. The preview was exercised with software WebGL, including playback and seeking. Selected frames were inspected; creative quality, full real-time visual review, platform placement and all audio remain for human review. No finished video export is claimed.
 
 The Anton font in `public/fonts/` is included with its OFL license. Remotion may have commercial-use requirements: https://www.remotion.dev/license .

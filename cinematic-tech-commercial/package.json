@@ -30,7 +30,8 @@
     "dev": "vite --host 0.0.0.0 --port 5173",
     "studio": "remotion studio src/index.ts --no-open",
     "test:mock": "tsc --outDir .mock-test-build --strict --skipLibCheck --module commonjs --target es2020 --moduleResolution node src/config/mockTimings.ts && node --test tests/mock-timings.test.cjs",
-    "build:preview": "vite build"
+    "build:preview": "vite build",
+    "test:aesthetic": "node --test tests/scene1-aesthetic.test.cjs"
   },
   "overrides": {
     "zod": "4.6.7"

@@ -3,165 +3,144 @@ import {AbsoluteFill, continueRender, delayRender, interpolate, spring, staticFi
 import {ThreeCanvas} from '@remotion/three';
 import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
-import {Atmosphere} from '../components/Atmosphere';
+import {CyberAtmosphere} from '../components/CyberAtmosphere';
 import {CinematicWord} from '../components/CinematicWord';
 import {AudioTrack} from '../audio/AudioTrack';
 import {SCENE_1_DURATION, SCENE_1_TIMINGS as t} from '../config/mockTimings';
 
+// Only these four palette colors are used in the scene; opacity supplies hierarchy.
+const VOID = '#050507';
+const LIME = '#D2FF52';
+const WHITE = '#FFFFFF';
+const HUD = '#1E2229';
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const lerp = (frame: number, input: number[], output: number[]) => interpolate(frame, input, output, clamp);
 
-const makeLabel = (label: string) => {
+const makeDollarTexture = () => {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
   const ctx = canvas.getContext('2d');
-  if (!ctx) throw new Error('Unable to create the procedural label texture.');
+  if (!ctx) throw new Error('Unable to create the dollar texture.');
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#ecffcc';
-  ctx.font = '800 270px sans-serif';
-  ctx.fillText(label, 256, 260);
+  ctx.fillStyle = LIME;
+  ctx.shadowColor = LIME;
+  ctx.shadowBlur = 24;
+  ctx.font = 'bold 310px Arial, sans-serif';
+  ctx.fillText('$', 256, 270);
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   return texture;
 };
 
-const Marker: React.FC<{label: 'A' | 'B'; position: [number, number, number]; frame: number}> = ({label, position, frame}) => {
-  const texture = useMemo(() => makeLabel(label), [label]);
+/** Frame-driven 3D wireframe token. Basic materials avoid muddy lighting. */
+const Dollar: React.FC<{frame: number}> = ({frame}) => {
+  const texture = useMemo(makeDollarTexture, []);
   useEffect(() => () => texture.dispose(), [texture]);
-  return (
-    <group position={position} rotation={[0.1, label === 'A' ? 0.22 : -0.22, 0.05 * Math.sin(frame * 0.04)]}>
-      <mesh><boxGeometry args={[0.68, 0.85, 0.20]} /><meshStandardMaterial color="#173d38" metalness={0.68} roughness={0.3} /></mesh>
-      <mesh position={[0, 0, 0.103]}><planeGeometry args={[0.57, 0.73]} /><meshBasicMaterial color="#1f6255" /></mesh>
-      <mesh position={[0, 0, 0.109]}><planeGeometry args={[0.46, 0.46]} /><meshBasicMaterial map={texture} transparent /></mesh>
-      <mesh position={[0, -0.51, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.52, 0.014, 8, 56]} /><meshBasicMaterial color="#b9ff73" transparent opacity={0.7} /></mesh>
-    </group>
-  );
-};
-
-const Dollar: React.FC<{position: [number, number, number]; frame: number}> = ({position, frame}) => {
-  const texture = useMemo(() => makeLabel('$'), []);
-  useEffect(() => () => texture.dispose(), [texture]);
-  return (
-    <group position={position} rotation={[0.16, 0.42 + frame * 0.035, 0.06]}>
-      <mesh rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.43, 0.43, 0.16, 56]} /><meshStandardMaterial color="#c9c46b" metalness={0.8} roughness={0.24} /></mesh>
-      <mesh position={[0, 0, 0.086]}><circleGeometry args={[0.40, 56]} /><meshStandardMaterial color="#c8c879" metalness={0.65} roughness={0.3} /></mesh>
-      <mesh position={[0, 0, 0.09]}><planeGeometry args={[0.59, 0.59]} /><meshBasicMaterial map={texture} transparent /></mesh>
-      <mesh position={[0, 0, -0.086]} rotation={[0, Math.PI, 0]}><circleGeometry args={[0.4, 56]} /><meshStandardMaterial color="#c8c879" metalness={0.65} roughness={0.3} /></mesh>
-      <mesh position={[0, 0, -0.09]} rotation={[0, Math.PI, 0]}><planeGeometry args={[0.59, 0.59]} /><meshBasicMaterial map={texture} transparent /></mesh>
-      <mesh rotation={[0.65, 0.2, frame * 0.025]}><torusGeometry args={[0.62, 0.012, 8, 72]} /><meshBasicMaterial color="#dfff80" transparent opacity={0.65} /></mesh>
-    </group>
-  );
+  const travel = lerp(frame, [t.using, t.neither, 123], [0, 0.5, 1]);
+  // Keep the moving token between the HUD terminals, never over their labels.
+  const x = -0.18 + travel * 0.36;
+  const y = Math.sin(travel * Math.PI) * 0.12;
+  return <group position={[x, y, 0.35]} rotation={[0.08, 0.35 + frame * 0.036, 0]} scale={0.85}>
+    <mesh><circleGeometry args={[0.43, 64]} /><meshBasicMaterial toneMapped={false} color={VOID} side={THREE.DoubleSide} /></mesh>
+    {[-0.065, 0.065].map((z) => <group key={z} position={[0, 0, z]}>
+      <mesh><torusGeometry args={[0.43, 0.009, 8, 64]} /><meshBasicMaterial toneMapped={false} color={LIME} /></mesh>
+      <mesh><torusGeometry args={[0.36, 0.003, 6, 64]} /><meshBasicMaterial toneMapped={false} color={WHITE} transparent opacity={0.8} /></mesh>
+      <mesh rotation={[0, z < 0 ? Math.PI : 0, 0]}><planeGeometry args={[0.58, 0.58]} /><meshBasicMaterial toneMapped={false} map={texture} transparent side={THREE.DoubleSide} /></mesh>
+    </group>)}
+    {Array.from({length: 16}, (_, i) => <mesh key={i} position={[0.43 * Math.cos(i * Math.PI / 8), 0.43 * Math.sin(i * Math.PI / 8), 0]}>
+      <boxGeometry args={[0.008, 0.008, 0.13]} /><meshBasicMaterial toneMapped={false} color={LIME} />
+    </mesh>)}
+    <mesh rotation={[0.6, 0.4, frame * 0.018]}><torusGeometry args={[0.50, 0.003, 6, 80]} /><meshBasicMaterial toneMapped={false} color={WHITE} transparent opacity={0.65} /></mesh>
+  </group>;
 };
 
 const CameraRig: React.FC<{frame: number; fps: number}> = ({frame, fps}) => {
   const {camera} = useThree();
   const push = spring({frame: frame - 8, fps, config: {mass: 0.4, stiffness: 115, damping: 18}});
-  camera.position.set(Math.sin(frame * 0.025) * 0.16, 0.12 + Math.cos(frame * 0.018) * 0.12, 10.4 - push * 0.65);
-  camera.lookAt(0, -0.25, 0);
+  camera.position.set(Math.sin(frame * 0.025) * 0.08, Math.cos(frame * 0.018) * 0.04, 10.4 - push * 0.65);
+  camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
   return null;
 };
 
-const World: React.FC<{frame: number; fps: number}> = ({frame, fps}) => {
-  const arrive = spring({frame: frame - 16, fps, config: {mass: 0.4, stiffness: 250, damping: 12}});
-  const separation = 1.75 - arrive * 0.55;
-  const travel = lerp(frame, [t.using, t.neither, 123], [0, 0.5, 1]);
-  const x = -0.95 + travel * 1.9;
-  const y = -0.30 + Math.sin(travel * Math.PI) * 0.25;
-  const beam = lerp(frame, [t.trade, t.currency], [0, 1]);
-  return (
-    <>
-      <CameraRig frame={frame} fps={fps} />
-      <ambientLight intensity={1.1} />
-      <directionalLight position={[3, 4, 6]} intensity={3.2} color="#e5ffcb" />
-      <pointLight position={[-3, 1, 4]} intensity={18} color="#65ffc3" />
-      <pointLight position={[3, 1, 3]} intensity={14} color="#dfff78" />
-      <group position={[0, -0.45, 0]}>
-        <Marker label="A" position={[-separation, 0.2, 0]} frame={frame} />
-        <Marker label="B" position={[separation, 0.2, 0]} frame={frame} />
-        <mesh position={[0, -0.31, -0.08]} scale={[beam, 1, 1]}>
-          <boxGeometry args={[2.45, 0.018, 0.018]} /><meshBasicMaterial color="#b3ffb1" transparent opacity={0.75} />
-        </mesh>
-        <Dollar position={[x, y, 0.42]} frame={frame} />
-        {[0, 1, 2].map((i) => (
-          <mesh key={i} position={[0, 0, -0.8 - i * 0.12]} rotation={[0.4 + i * 0.2, frame * 0.012, frame * 0.012 + i]}>
-            <torusGeometry args={[1.55 + i * 0.14, 0.008, 8, 72]} />
-            <meshBasicMaterial color={i === 1 ? '#e6f58c' : '#54cdb3'} transparent opacity={0.24} />
-          </mesh>
-        ))}
-        {Array.from({length: 30}, (_, i) => (
-          <mesh key={i} position={[Math.sin(i * 8.7) * 1.9, Math.cos(i * 3.17) * 1.9, -1 - (i % 5) * 0.25]}>
-            <sphereGeometry args={[i % 6 === 0 ? 0.022 : 0.012, 6, 6]} />
-            <meshBasicMaterial color={i % 4 ? '#7eead5' : '#e5ff90'} transparent opacity={0.5} />
-          </mesh>
-        ))}
-      </group>
-    </>
-  );
+const Node: React.FC<{name: 'A' | 'B'; frame: number; fps: number}> = ({name, frame, fps}) => {
+  const arrival = spring({frame: frame - 16, fps, config: {mass: 0.4, stiffness: 250, damping: 12}});
+  const offset = 355 - arrival * 50;
+  return <div style={{position:'absolute', top:844, left:'50%', width:232, height:232, marginLeft:-116,
+    transform:`translateX(${name === 'A' ? -offset : offset}px)`, border:`1px solid ${LIME}`,
+    borderRadius:'50%', boxShadow:'0 0 14px rgba(210,255,82,.32), inset 0 0 12px rgba(210,255,82,.12)',
+    display:'flex', alignItems:'center', justifyContent:'center', color:WHITE, font:'700 29px Arial, sans-serif', letterSpacing:3}}>
+    <div style={{position:'absolute', inset:12, border:`1px solid ${HUD}`, borderRadius:'50%'}} />
+    <div style={{position:'absolute', inset:-8, transform:`rotate(${frame * (name === 'A' ? 0.8 : -0.8)}deg)`}}>
+      <div style={{position:'absolute', left:'50%', top:0, width:2, height:15, background:LIME, boxShadow:'0 0 9px #D2FF52'}} />
+      <div style={{position:'absolute', left:'50%', bottom:0, width:2, height:15, background:LIME}} />
+    </div>
+    <span>NODE {name}</span>
+  </div>;
 };
 
 type Phrase = {start: number; end: number; words: {text: string; at: number}[]};
 const phrases: Phrase[] = [
-  {start: t.why, end: t.two, words: [{text: 'WHY', at: t.why}, {text: 'WOULD', at: t.would}]},
-  {start: t.two, end: t.trade, words: [{text: 'TWO', at: t.two}, {text: 'COUNTRIES', at: t.countries}]},
-  {start: t.trade, end: t.a, words: [{text: 'TRADE', at: t.trade}, {text: 'USING', at: t.using}]},
-  {start: t.a, end: t.neither, words: [{text: 'A', at: t.a}, {text: 'CURRENCY', at: t.currency}]},
+  {start:t.why, end:t.two, words:[{text:'WHY', at:t.why}, {text:'WOULD', at:t.would}]},
+  {start:t.two, end:t.trade, words:[{text:'TWO', at:t.two}, {text:'COUNTRIES', at:t.countries}]},
+  {start:t.trade, end:t.a, words:[{text:'TRADE', at:t.trade}, {text:'USING', at:t.using}]},
+  {start:t.a, end:t.neither, words:[{text:'A', at:t.a}, {text:'CURRENCY', at:t.currency}]},
 ];
-
 const PhraseType: React.FC<{phrase: Phrase; frame: number; fps: number}> = ({phrase, frame, fps}) => {
   if (frame < phrase.start || frame >= phrase.end) return null;
-  return (
-    <div style={{position: 'absolute', left: 78, right: 78, top: 250, fontFamily: 'Anton, Impact, sans-serif', lineHeight: 0.97, textShadow: '0 8px 35px rgba(0,0,0,.55)'}}>
-      {phrase.words.map(({text, at}, i) => {
-        const progress = spring({frame: frame - at, fps, config: {mass: 0.4, stiffness: 250, damping: 12}});
-        const outgoing = lerp(frame, [phrase.end - 3, phrase.end], [1, 0]);
-        return <div key={text} style={{fontSize: text.length > 8 ? 136 : 170, color: i === 0 ? '#f4ffe9' : '#dfff84', opacity: (frame >= at ? 1 : 0) * outgoing, transform: `translate3d(0, ${(1 - progress) * 55}px, 0) scale(${0.85 + 0.15 * progress})`, transformOrigin: 'left center'}}>{text}</div>;
-      })}
-    </div>
-  );
+  return <div style={{position:'absolute', left:78, right:78, top:250, fontFamily:'Anton, Impact, sans-serif', lineHeight:0.97}}>
+    {phrase.words.map(({text, at}) => {
+      const progress = spring({frame:frame-at, fps, config:{mass:0.4, stiffness:250, damping:12}});
+      const outgoing = lerp(frame, [phrase.end-3, phrase.end], [1,0]);
+      return <div key={text} style={{fontSize:text.length > 8 ? 136 : 170, color:WHITE, opacity:(frame >= at ? 1 : 0)*outgoing,
+        transform:`translate3d(0, ${(1-progress)*55}px, 0) scale(${0.85+0.15*progress})`, transformOrigin:'left center'}}>{text}</div>;
+    })}
+  </div>;
 };
 
 const Caption: React.FC<{frame: number}> = ({frame}) => {
   const rows = [
-    [{word: 'Why', at: t.why}, {word: 'would', at: t.would}, {word: 'two', at: t.two}, {word: 'countries', at: t.countries}, {word: 'trade', at: t.trade}],
-    [{word: 'using', at: t.using}, {word: 'a', at: t.a}, {word: 'currency', at: t.currency}, {word: 'neither', at: t.neither}, {word: 'one', at: t.one}, {word: 'issues?', at: t.issues}],
+    [{word:'WHY', at:t.why}, {word:'WOULD', at:t.would}, {word:'TWO', at:t.two}, {word:'COUNTRIES', at:t.countries}, {word:'TRADE', at:t.trade}],
+    [{word:'USING', at:t.using}, {word:'A', at:t.a}, {word:'CURRENCY', at:t.currency}, {word:'NEITHER', at:t.neither}, {word:'ONE', at:t.one}, {word:'ISSUES?', at:t.issues}],
   ];
-  const flat = rows.flat();
-  const current = flat.reduce((index, item, i) => frame >= item.at ? i : index, -1);
-  let n = 0;
-  return <div style={{position: 'absolute', left: 70, right: 70, bottom: 210, borderRadius: 12, background: 'rgba(6,16,22,.89)', border: '1px solid rgba(190,255,158,.22)', padding: '22px 12px', textAlign: 'center', fontFamily: 'Arial, sans-serif', fontWeight: 700, fontSize: 34, lineHeight: 1.45, color: '#edf9e7'}}>
-    {rows.map((row, rowIndex) => <div key={rowIndex}>{row.map(({word}, i) => {const idx = n++; return <span key={word} style={{color: idx === current ? '#dfff86' : '#edf9e7'}}>{word}{i < row.length - 1 ? ' ' : ''}</span>;})}</div>)}
+  return <div style={{position:'absolute', left:70, right:70, bottom:210, background:VOID, border:`1px solid ${HUD}`,
+    padding:'24px 12px', textAlign:'center', fontFamily:'Arial, sans-serif', fontWeight:700, fontSize:31, lineHeight:1.55, color:WHITE}}>
+    {rows.map((row, i) => <div key={i}>{row.map(({word}, j) => <span key={word} style={{color:word === 'NEITHER' && frame >= t.neither ? LIME : WHITE}}>{word}{j < row.length-1 ? ' ' : ''}</span>)}</div>)}
   </div>;
 };
 
-/** Silent prototype of approved scene 1. Every frame marker is estimated. */
+/** Silent Scene 1 prototype. Every frame marker is estimated. */
 export const Scene1: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps, width, height} = useVideoConfig();
   const [fontHandle] = useState(() => delayRender('Load Anton for Scene 1'));
-  useEffect(() => {
-    document.fonts.load('100px Anton').then(() => continueRender(fontHandle)).catch(() => continueRender(fontHandle));
-  }, [fontHandle]);
-  const finalLine = spring({frame: frame - t.one, fps, config: {mass: 0.4, stiffness: 250, damping: 12}});
-  const issueLine = spring({frame: frame - t.issues, fps, config: {mass: 0.4, stiffness: 250, damping: 12}});
+  useEffect(() => {document.fonts.load('100px Anton').then(() => continueRender(fontHandle)).catch(() => continueRender(fontHandle));}, [fontHandle]);
+  const finalLine = spring({frame:frame-t.one, fps, config:{mass:0.4, stiffness:250, damping:12}});
+  const issueLine = spring({frame:frame-t.issues, fps, config:{mass:0.4, stiffness:250, damping:12}});
+  const beam = lerp(frame, [t.trade,t.currency], [0,1]);
 
-  return <AbsoluteFill style={{overflow: 'hidden'}}>
+  return <AbsoluteFill style={{overflow:'hidden', background:VOID}}>
     <style>{`@font-face { font-family: Anton; src: url('${staticFile('fonts/Anton-Regular.ttf')}'); }`}</style>
-    <CinematicWord text="NEITHER" triggerFrame={t.neither} playImpactSound={false} textStyle={{fontFamily: 'Anton, Impact, sans-serif', fontSize: 182, position: 'absolute', top: 268, left: 78, letterSpacing: '-0.01em'}}>
-      <Atmosphere durationInFrames={SCENE_1_DURATION} />
-      <ThreeCanvas width={width} height={height} camera={{position: [0, 0, 10.4], fov: 36, near: 0.1, far: 60}} gl={{alpha: true, antialias: true}}>
-        <World frame={frame} fps={fps} />
+    <CinematicWord text="NEITHER" triggerFrame={t.neither} playImpactSound={false} accentMode="lime"
+      textStyle={{fontFamily:'Anton, Impact, sans-serif', fontSize:182, position:'absolute', top:268, left:78, letterSpacing:'-0.01em', color:LIME}}>
+      <CyberAtmosphere />
+      <div style={{position:'absolute', left:116, right:116, top:959, height:1, background:HUD}}>
+        <div style={{width:`${beam*100}%`, height:1, background:LIME, boxShadow:'0 0 8px #D2FF52', opacity:0.7}} />
+      </div>
+      <Node name="A" frame={frame} fps={fps} /><Node name="B" frame={frame} fps={fps} />
+      <ThreeCanvas width={width} height={height} camera={{position:[0,0,10.4], fov:36, near:0.1, far:60}} gl={{alpha:true, antialias:true}}>
+        <CameraRig frame={frame} fps={fps} /><Dollar frame={frame} />
       </ThreeCanvas>
-      <div style={{position: 'absolute', left: 78, right: 78, top: 130, display: 'flex', justifyContent: 'space-between', font: '22px monospace', letterSpacing: 3, color: '#c3e8b5'}}><span>GLOBAL TRADE / 01</span><span>ILLUSTRATIVE</span></div>
-      <div style={{position: 'absolute', left: 78, right: 78, top: 167, height: 2, background: 'rgba(192,255,166,.18)'}}><div style={{height: 2, width: `${(frame / (SCENE_1_DURATION - 1)) * 100}%`, background: '#dfff84'}} /></div>
-      {phrases.map((phrase) => <PhraseType key={phrase.start} phrase={phrase} frame={frame} fps={fps} />)}
-      {frame >= t.one && <div style={{position: 'absolute', left: 78, top: 480, fontFamily: 'Anton, Impact, sans-serif', fontSize: 150, lineHeight: 1, color: '#dfff84', textShadow: '0 8px 30px rgba(0,0,0,.6)', transform: `translateY(${(1 - finalLine) * 40}px) scale(${0.9 + 0.1 * finalLine})`, transformOrigin: 'left center'}}>ONE {frame >= t.issues && <span style={{display: 'inline-block', transform: `translateY(${(1 - issueLine) * 40}px) scale(${0.9 + 0.1 * issueLine})`, transformOrigin: 'left center'}}>ISSUES?</span>}</div>}
-      <div style={{position: 'absolute', left: 0, right: 0, top: 1370, textAlign: 'center', color: '#b8dfb2', font: '21px monospace', letterSpacing: 3}}>A + B  /  USD AS THE SHARED UNIT</div>
+      <div style={{position:'absolute', left:78, right:78, top:130, display:'flex', justifyContent:'space-between', font:'22px monospace', letterSpacing:3, color:WHITE}}><span>GLOBAL TRADE / 01</span><span>ILLUSTRATIVE</span></div>
+      <div style={{position:'absolute', left:78, right:78, top:167, height:1, background:HUD}}><div style={{height:1, width:`${(frame/(SCENE_1_DURATION-1))*100}%`, background:LIME}} /></div>
+      {phrases.map(phrase => <PhraseType key={phrase.start} phrase={phrase} frame={frame} fps={fps} />)}
+      {frame >= t.one && <div style={{position:'absolute', left:78, top:480, fontFamily:'Anton, Impact, sans-serif', fontSize:150, lineHeight:1, color:WHITE,
+        transform:`translateY(${(1-finalLine)*40}px) scale(${0.9+0.1*finalLine})`, transformOrigin:'left center'}}>ONE {frame >= t.issues && <span style={{display:'inline-block', transform:`translateY(${(1-issueLine)*40}px) scale(${0.9+0.1*issueLine})`, transformOrigin:'left center'}}>ISSUES?</span>}</div>}
+      <div style={{position:'absolute', left:0, right:0, top:1255, textAlign:'center', color:WHITE, font:'21px monospace', letterSpacing:3}}>NODE A + NODE B / USD AS THE SHARED UNIT</div>
       <Caption frame={frame} />
-      {frame >= 135 && [0, 1, 2].map((i) => <div key={i} aria-hidden="true" style={{position: 'absolute', top: `${25 + i * 24 + ((frame + i) % 3) * 2}%`, left: `${((frame - 135) * 29 + i * 31) % 95 - 8}%`, width: `${23 + i * 8}%`, height: i === 1 ? 5 : 3, background: i === 1 ? 'rgba(126,255,234,.65)' : 'rgba(255,91,141,.6)', boxShadow: '6px 0 rgba(109,148,255,.5)', pointerEvents: 'none'}} />)}
-      {frame >= 135 && <div aria-hidden="true" style={{position: 'absolute', top: 0, bottom: 0, left: `${(frame - 135) * 17 - 40}%`, width: '24%', background: 'linear-gradient(90deg,transparent,rgba(222,255,132,.15),transparent)', transform: 'skewX(-12deg)', pointerEvents: 'none'}} />}
+      {frame >= 135 && [0,1,2].map(i => <div key={i} aria-hidden="true" style={{position:'absolute', top:`${25+i*24+((frame+i)%3)*2}%`, left:`${((frame-135)*29+i*31)%95-8}%`, width:`${23+i*8}%`, height:i===1?5:3, background:i===1?WHITE:LIME, opacity:0.6, pointerEvents:'none'}} />)}
     </CinematicWord>
     <AudioTrack />
   </AbsoluteFill>;
