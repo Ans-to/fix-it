@@ -1,6 +1,6 @@
 # Cinematic tech commercial
 
-Status: **storyboard phase pending**. Dependencies are installed; no scenes or video code have been written.
+Status: **storyboard approved**. Reusable atmosphere and impact-word components are in `src/components/`; individual scenes have not been built.
 
 ## Direction rules
 
@@ -11,4 +11,10 @@ Status: **storyboard phase pending**. Dependencies are installed; no scenes or v
 
 ## Dependencies
 
-Install from the lockfile with `npm ci`. The requested packages are Three.js, Three.js types, React Three Fiber, Drei, Remotion Three, and Lucide React. React, React DOM and Remotion are currently installed as dependencies or peers; additional development tooling can be selected after the storyboard.
+Install from the lockfile with `npm ci`. The requested packages are Three.js, Three.js types, React Three Fiber, Drei, Remotion Three, and Lucide React. React, React DOM and Remotion are explicit runtime dependencies; TypeScript and React types support the components. Run `npm run typecheck` to check the two components.
+
+## Component integration
+
+- `Atmosphere` renders a textured, vignetted background with a frame-driven zoom. Supply `durationInFrames` for the containing scene when it differs from the composition length.
+- `CinematicWord` wraps the **whole visual scene** in its `children` so its five-frame shake affects the viewport. Pass `text`, the Sequence-relative `triggerFrame`, and an `impactSoundSrc` pointing to an appropriately licensed sub-bass asset. The component triggers that asset at the hit but does not supply it. `textStyle`, `seed`, `shakePixels`, and `impactVolume` are optional.
+- Impact words, VO timings and audio choices remain to be integrated when scenes are built. The storyboard is `storyboard.json`.
