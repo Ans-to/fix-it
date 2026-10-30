@@ -7,7 +7,7 @@ export type CinematicWordProps = {
   triggerFrame: number;
   /** Asset path relative to public/, e.g. 'sub_drop.mp3' (not a resolved URL). */
   impactSoundSrc?: string;
-  /** Set false when AudioTrack triggers all impact sounds centrally. */
+  /** Set false when ProductionAudioTrack triggers all impact sounds centrally. */
   playImpactSound?: boolean;
   /** Put every visible scene layer here so the entire viewport shakes together. */
   children: ReactNode;
@@ -21,7 +21,7 @@ export type CinematicWordProps = {
 /**
  * Impact word and viewport wrapper. Only children of this component are shaken;
  * mount all scene visuals inside it, not as siblings. By default an audio
- * source is required. Disable its sound when using the central AudioTrack,
+ * source is required. Disable its sound when using the central ProductionAudioTrack,
  * which triggers the sub-drop, to avoid doubling the effect.
  */
 export const CinematicWord: React.FC<CinematicWordProps> = ({

@@ -1,3 +1,5 @@
 node_modules/
 
 .audio-test-build/
+dist/
+.mock-test-build/

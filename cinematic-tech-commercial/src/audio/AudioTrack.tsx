@@ -72,11 +72,11 @@ export const buildMusicSegments = (
  * Mount once at composition root. Ranges and cues use composition-frame time;
  * no storyboard duration can substitute for measuring the actual narration.
  *
- * Use playImpactSound={false} on CinematicWord when AudioTrack handles SFX,
+ * Use playImpactSound={false} on CinematicWord when ProductionAudioTrack handles SFX,
  * so a sub-drop is not played twice. This component does not supply the files
  * or determine the speech/word timings automatically.
  */
-export const AudioTrack: React.FC<AudioTrackProps> = ({
+export const ProductionAudioTrack: React.FC<AudioTrackProps> = ({
   speechRanges,
   impactCues,
   voiceoverStartFrame = 0,
@@ -154,3 +154,8 @@ export const AudioTrack: React.FC<AudioTrackProps> = ({
     </>
   );
 };
+
+/** Silent prototype: it intentionally performs no asset lookup and renders no audio.
+ * Use ProductionAudioTrack only after real assets and measured timings are supplied.
+ */
+export const AudioTrack: React.FC = () => null;

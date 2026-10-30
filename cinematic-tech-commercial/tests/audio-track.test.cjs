@@ -18,3 +18,10 @@ test('overlapping and adjacent ranges remain ducked without a gap', () => {
   assert.equal(segments.at(-1).startFrame,11);
   assert.equal(segments.at(-1).volume,0.5);
 });
+
+test('prototype AudioTrack renders silently with no timing props or audio assets', () => {
+  const React = require('react');
+  const {renderToStaticMarkup} = require('react-dom/server');
+  const {AudioTrack} = require('../.audio-test-build/AudioTrack.js');
+  assert.equal(renderToStaticMarkup(React.createElement(AudioTrack)), '');
+});

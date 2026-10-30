@@ -1,22 +1,26 @@
-# Cinematic tech commercial
+# Cinematic tech commercial — scene 1 prototype
 
-Status: **storyboard approved**. Reusable atmosphere and impact-word components are in `src/components/`, and the audio sequencer is in `src/audio/`; individual scenes have not been built. The requested audio assets and measured timing data are not currently present in this checkout.
+The approved storyboard is `storyboard.json`. **Scene 1 is a silent visual prototype**, not the completed commercial. Scene 1 uses frame-driven 3D markers, a moving USD token, camera motion, kinetic type, and the reusable atmosphere and impact components. A/B are illustrative, not representations of a particular country or transaction.
 
-## Direction rules
+## Preview
 
-- Keep each scene in its own component under `src/scenes/`; do not use monolithic scene code.
-- Use atmospheric texture—such as vignettes, grids and glowing trackers—instead of flat black backgrounds, and high-velocity spring physics instead of standard web ease-in-out.
-- Every impact keyword receives screen shake, chromatic aberration and a sub-bass audio trigger.
-- Complete the storyboard phase before writing any video code.
+```sh
+npm ci
+npm run dev
+```
 
-## Dependencies
+Open the displayed Vite URL to review the Remotion Player. Use the player controls or the cue buttons to seek. `npm run studio` also opens the `Scene1Prototype` composition in Remotion Studio. The current preview proposes 1080×1920 and uses the requested 30 fps; it runs for the approved scene's 4.7 seconds (141 frames). Output format is a prototype assumption, not an approved delivery specification.
 
-Install from the lockfile with `npm ci`. The requested packages are Three.js, Three.js types, React Three Fiber, Drei, Remotion Three, and Lucide React. React, React DOM and Remotion are explicit runtime dependencies; TypeScript and React types support the components. Run `npm run typecheck` and `npm run test:audio` for the component type check and audio timing unit tests.
+`src/config/mockTimings.ts` contains **estimated** scene-relative word cues: they are not derived from a recording, and must be replaced before audio synchronization. At frame 86, “NEITHER” triggers the word component's spring, five-frame deterministic shake, chromatic text and one-frame flash. All timing remains provisional.
 
-## Component integration
+## Audio and integration
 
-- `Atmosphere` renders a textured, vignetted background with a frame-driven zoom. Supply `durationInFrames` for the containing scene when it differs from the composition length.
-- `CinematicWord` wraps the **whole visual scene** in its `children` so its five-frame shake affects the viewport. Pass `text` and the Sequence-relative `triggerFrame`. When used by itself, pass `impactSoundSrc` as a path **relative to `public/`** (for example `sub_drop.mp3`); the component now applies `staticFile()` internally. This changes the previous API, which expected an already-resolved URL. When `AudioTrack` handles effects, pass `playImpactSound={false}` to prevent double-playing the sub-drop. `textStyle`, `seed`, `shakePixels`, and `impactVolume` are optional.
-- Mount `AudioTrack` once at the composition root and provide `speechRanges` (all measured voice-active intervals) and `impactCues` (the actual start frames for `neither`, `only`, `leading`, and `1944`). Both use **composition-relative 30 fps frames**, and each speech range is `[startFrame, endFrame)`. Its voiceover starts at frame 0 unless `voiceoverStartFrame` is supplied. If a scene begins later, use `impactCue.frame - sceneStartFrame` as the scene-relative `CinematicWord.triggerFrame`. No cue frames or voice ranges are guessed from scene durations.
-- Place `voiceover.mp3`, `bgm.mp3`, `whoosh.mp3`, and `sub_drop.mp3` in this project's `public/` directory. None are currently supplied. The BGM must cover the entire composition: the sequencer preserves position across ducking segments but does not loop a short file.
-- BGM is reduced by exactly 8 dB in the supplied speech ranges using constant-volume segments. A synthetic encoded-audio test measured approximately -8.01 dB in two stable speech windows; this does not verify the unavailable real assets, actual speech boundaries, audible sync or perceived mix. Abrupt gain changes can be audible and need listening review. The storyboard is `storyboard.json`.
+`<AudioTrack />` is intentionally a silent placeholder. It does not check for or load any MP3s; `Scene1` also disables the impact-word component's own sound. Consequently this prototype has **no music, voiceover, whoosh or sub-drop**, including at impact frames.
+
+The earlier real-audio implementation is retained as `ProductionAudioTrack` in `src/audio/AudioTrack.tsx` but is not mounted. It requires the four named audio files in `public/`, actual voice-active ranges, and verified impact cues at composition-relative 30 fps. It uses `staticFile()` and applies an 8 dB reduction to music across supplied ranges. Its BGM must cover the full composition; it does not automatically loop. Once audio is approved, mount it at composition root and keep `playImpactSound={false}` on the words to avoid doubling the sub-drop. For a standalone `CinematicWord`, `impactSoundSrc` is a file path relative to `public/` (not an already-resolved URL).
+
+## Checks
+
+`npm run typecheck`, `npm run test:audio`, `npm run test:mock`, and `npm run build:preview` validate types, silent-placeholder behavior, mock timing order, audio gain math, and the preview bundle. The preview was exercised with software WebGL, including playback and seeking. Selected frames were inspected; creative quality, full real-time visual review, platform placement and all audio remain for human review. No finished video export is claimed.
+
+The Anton font in `public/fonts/` is included with its OFL license. Remotion may have commercial-use requirements: https://www.remotion.dev/license .
