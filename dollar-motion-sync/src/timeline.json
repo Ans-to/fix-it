@@ -1,0 +1,269 @@
+{
+  "schema_version": "motion-sync-v1.0.0",
+  "status": "ILLUSTRATIVE TEST \u2014 output geometry and timing proposed",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_frames": 450
+  },
+  "voice": "Kokoro-82M-v1.0 q8 am_eric speed 1.08",
+  "beats_per_minute": 120,
+  "beat_origin_frame": 0,
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0,
+      "end": 105,
+      "voice_start": 3,
+      "voice_duration": 2.8097916666666665,
+      "caption_lines": [
+        [
+          "Why",
+          "does",
+          "the",
+          "world",
+          "use"
+        ],
+        [
+          "dollars?",
+          "It's",
+          "not",
+          "just",
+          "America."
+        ]
+      ]
+    },
+    {
+      "id": "markets",
+      "start": 105,
+      "end": 210,
+      "voice_start": 105,
+      "voice_duration": 2.7705416666666665,
+      "caption_lines": [
+        [
+          "Deep",
+          "markets",
+          "make",
+          "dollars",
+          "easier"
+        ],
+        [
+          "to",
+          "trade",
+          "and",
+          "hold."
+        ]
+      ]
+    },
+    {
+      "id": "network",
+      "start": 210,
+      "end": 330,
+      "voice_start": 210,
+      "voice_duration": 3.165791666666667,
+      "caption_lines": [
+        [
+          "As",
+          "more",
+          "people",
+          "accept",
+          "them,"
+        ],
+        [
+          "more",
+          "connections",
+          "become",
+          "possible."
+        ]
+      ]
+    },
+    {
+      "id": "qualifier",
+      "start": 330,
+      "end": 450,
+      "voice_start": 330,
+      "voice_duration": 2.8752916666666666,
+      "caption_lines": [
+        [
+          "The",
+          "dollar",
+          "leads."
+        ],
+        [
+          "But",
+          "it's",
+          "not",
+          "the",
+          "only",
+          "global",
+          "currency."
+        ]
+      ]
+    }
+  ],
+  "titles": [
+    {
+      "id": "why",
+      "start": 0,
+      "end": 17,
+      "lines": [
+        "WHY?"
+      ],
+      "cue": "clip 1 word 1 (shown immediately for the hook)",
+      "style": "burst"
+    },
+    {
+      "id": "world",
+      "start": 17,
+      "end": 30,
+      "lines": [
+        "THE WORLD"
+      ],
+      "cue": "clip 1 world",
+      "style": "left"
+    },
+    {
+      "id": "dollar",
+      "start": 30,
+      "end": 56,
+      "lines": [
+        "DOLLARS?"
+      ],
+      "cue": "clip 1 dollars",
+      "style": "burst"
+    },
+    {
+      "id": "america",
+      "start": 56,
+      "end": 105,
+      "lines": [
+        "NOT JUST",
+        "AMERICA."
+      ],
+      "cue": "clip 1 not",
+      "style": "right"
+    },
+    {
+      "id": "markets",
+      "start": 105,
+      "end": 159,
+      "lines": [
+        "DEEP",
+        "MARKETS."
+      ],
+      "cue": "clip 2 deep",
+      "style": "left"
+    },
+    {
+      "id": "trade",
+      "start": 159,
+      "end": 210,
+      "lines": [
+        "TRADE",
+        "& HOLD."
+      ],
+      "cue": "clip 2 trade",
+      "style": "right"
+    },
+    {
+      "id": "people",
+      "start": 210,
+      "end": 257,
+      "lines": [
+        "MORE",
+        "PEOPLE."
+      ],
+      "cue": "clip 3 as",
+      "style": "left"
+    },
+    {
+      "id": "connections",
+      "start": 257,
+      "end": 330,
+      "lines": [
+        "MORE",
+        "CONNECTIONS."
+      ],
+      "cue": "clip 3 connections",
+      "style": "right"
+    },
+    {
+      "id": "leads",
+      "start": 330,
+      "end": 365,
+      "lines": [
+        "THE DOLLAR",
+        "LEADS."
+      ],
+      "cue": "clip 4 the",
+      "style": "left"
+    },
+    {
+      "id": "only",
+      "start": 365,
+      "end": 450,
+      "lines": [
+        "NOT THE",
+        "ONLY ONE."
+      ],
+      "cue": "clip 4 not",
+      "style": "right"
+    }
+  ],
+  "sound_cues": [
+    {
+      "id": "opening-impact",
+      "frame": 0,
+      "type": "impact",
+      "reason": "intro"
+    },
+    {
+      "id": "dollar-hit",
+      "frame": 30,
+      "type": "impact",
+      "reason": "dollars emphasized"
+    },
+    {
+      "id": "markets-downbeat",
+      "frame": 105,
+      "type": "impact",
+      "reason": "markets on 120 BPM beat"
+    },
+    {
+      "id": "trade-tick",
+      "frame": 159,
+      "type": "tick",
+      "reason": "trade word"
+    },
+    {
+      "id": "network-downbeat",
+      "frame": 210,
+      "type": "impact",
+      "reason": "network on 120 BPM beat"
+    },
+    {
+      "id": "new-node",
+      "frame": 257,
+      "type": "tick",
+      "reason": "connections word"
+    },
+    {
+      "id": "payoff-downbeat",
+      "frame": 330,
+      "type": "impact",
+      "reason": "payoff on 120 BPM beat"
+    },
+    {
+      "id": "qualifier",
+      "frame": 365,
+      "type": "tick",
+      "reason": "not emphasized"
+    }
+  ],
+  "sources": [
+    "https://www.federalreserve.gov/econres/notes/feds-notes/2nd-annual-international-roles-of-the-us-dollar-conference-20230623.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/fifth-conference-on-the-international-roles-of-the-u-s-dollar-stablecoins-digital-payments-and-the-ir-of-the-usd-20260716.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/the-international-role-of-the-u-s-dollar-2025-edition-20250718.html"
+  ]
+}

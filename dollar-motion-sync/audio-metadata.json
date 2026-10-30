@@ -1,0 +1,13 @@
+{
+  "sample_rate": 48000,
+  "duration_seconds": 15,
+  "voice": "Kokoro am_eric; RMS envelope compression threshold .11, ratio 2.2:1, detector 20ms attack / 130ms release, 1.15 makeup; no de-essing",
+  "music": "original procedural 120 BPM dark minor-key pulse; arranged reduction at 10.25-10.7 s then rises by 11s",
+  "sfx": "original procedural impact, noise risers and electronic ticks, placed by timeline cue frames",
+  "ducking": "music-only VO-driven 10ms RMS detector, 35ms attack/240ms release, 0 to -7.5 dB gain",
+  "minimum_music_gain_db": -7.499999999961682,
+  "maximum_music_gain_db": -0.0,
+  "pre_encode_sample_peak": 0.5177662311129076,
+  "pre_encode_rms": 0.08791784053848715,
+  "note": "Measured gain values are applied control values, not subjective mix quality or true-peak/loudness certification. Human listening not performed."
+}

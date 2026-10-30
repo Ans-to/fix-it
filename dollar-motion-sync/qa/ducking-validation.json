@@ -1,0 +1,9 @@
+{
+  "method": "10ms RMS ratio of independently written 16-bit unducked and ducked music bus WAVs; excludes blocks with original RMS <= 0.003; compared with control gain sampled at block start",
+  "compared_blocks": 1413,
+  "observed_min_db": -7.55101812331149,
+  "observed_max_db": 0.0,
+  "median_absolute_control_error_db": 0.026218910631688352,
+  "p95_absolute_control_error_db": 0.14032362695269687,
+  "limitations": "Block measurements and PCM quantization, not perceived loudness, sound quality, output AAC ducking or a human review"
+}

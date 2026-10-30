@@ -1,6 +1,6 @@
 # Social Video & Motion Design Director
 
-`SKILL.md` is the entry point. Install or copy the **whole skill directory**: references and templates, including the motion-first quality gate, are required for full production/review; `code-video/` is required for a complete code-video handoff. `SKILL.md` has a missing-companion fallback. `evals/` is optional. The skill directs audience-aware storytelling, visual design, motion and handoff; it does not itself guarantee engagement, accessibility, factual accuracy or a completed video.
+`SKILL.md` is the entry point. Install or copy the **whole skill directory**: references and templates, including the motion-first quality gate and audio-visual synchronization guidance, are required for full production/review; `code-video/` is required for a complete code-video handoff. `SKILL.md` has a missing-companion fallback. `evals/` is optional. The skill directs audience-aware storytelling, visual design, motion and handoff; it does not itself guarantee engagement, accessibility, factual accuracy or a completed video.
 
 The operating contract covers intake/routing, confirmed vs proposed timing, claim and qualifier checks, geometry, reading holds, captions and contrast, placement sources, checksums, sampling, review status and revisions. The templates provide concrete records. Placement resources are starting points, not universal safe zones.
 

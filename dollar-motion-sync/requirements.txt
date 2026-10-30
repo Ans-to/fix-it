@@ -1,0 +1,4 @@
+numpy==2.4.6
+jsonschema==4.26.0
+# Optional, only for re-estimating speech timings with a separately supplied model:
+faster-whisper==1.2.1

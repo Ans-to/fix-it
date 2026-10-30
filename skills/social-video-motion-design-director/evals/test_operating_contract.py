@@ -163,7 +163,7 @@ class SkillPackagingTests(unittest.TestCase):
     def test_all_required_companions_exist(self):
         for file in ['references/operating-contract.md','references/creative-direction.md',
                      'references/production-and-review.md','references/visual-proof-and-handoff.md',
-                     'references/platform-sources.md','references/motion-first-quality.md','templates/production-plan.md',
+                     'references/platform-sources.md','references/motion-first-quality.md','references/audio-visual-synchronization.md','templates/production-plan.md',
                      'templates/claim-proof-map.md','templates/review.md','templates/revision-log.md',
                      'code-video/CONTRACT.md','code-video/manifest.schema.json',
                      'code-video/tools/vector_profile.py','code-video/tools/qa.py',
@@ -189,5 +189,21 @@ class MotionFirstContractTests(unittest.TestCase):
                        'continuous-motion, pacing and listening review NOT CHECKED',
                        'FAIL or NEEDS HUMAN REVIEW']:
             with self.subTest(phrase=phrase): self.assertIn(phrase,gate)
+
+class AudioVisualSyncContractTests(unittest.TestCase):
+    def test_sync_guidance_is_packaged_and_scoped(self):
+        entry=(ROOT/'SKILL.md').read_text()
+        guide=(ROOT/'references/audio-visual-synchronization.md').read_text()
+        self.assertIn('references/audio-visual-synchronization.md',entry)
+        for phrase in ['actual approved VO first', 'automatic aligner is an estimate',
+                       'Converting seconds to frames quantizes events', 'phrase-level captions',
+                       'not independently verified', 'NOT CHECKED']:
+            with self.subTest(phrase=phrase): self.assertIn(phrase,guide)
+    def test_audio_bus_and_listening_requirements(self):
+        guide=(ROOT/'references/audio-visual-synchronization.md').read_text()
+        for phrase in ['music bus driven by VO', 'attack/release/range',
+                       'not proof of a good mix', 'Listen to the whole piece',
+                       'do not claim beat sync']:
+            with self.subTest(phrase=phrase): self.assertIn(phrase,guide)
 
 if __name__=='__main__': unittest.main(verbosity=2)

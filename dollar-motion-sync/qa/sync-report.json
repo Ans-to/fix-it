@@ -1,0 +1,73 @@
+{
+  "fps": 30,
+  "type": "timeline consistency against automatic ASR estimates; not proof of audible sync",
+  "events": [
+    {
+      "title_id": "world",
+      "word": "world",
+      "automatic_onset_seconds": 0.58,
+      "visual_frame": 17,
+      "visual_minus_estimate_ms": -13.333,
+      "sfx_id": null,
+      "sfx_frame": null,
+      "visual_sfx_frame_offset": null
+    },
+    {
+      "title_id": "dollar",
+      "word": "dollars?",
+      "automatic_onset_seconds": 1.0,
+      "visual_frame": 30,
+      "visual_minus_estimate_ms": 0.0,
+      "sfx_id": "dollar-hit",
+      "sfx_frame": 30,
+      "visual_sfx_frame_offset": 0
+    },
+    {
+      "title_id": "america",
+      "word": "not",
+      "automatic_onset_seconds": 1.86,
+      "visual_frame": 56,
+      "visual_minus_estimate_ms": 6.667,
+      "sfx_id": null,
+      "sfx_frame": null,
+      "visual_sfx_frame_offset": null
+    },
+    {
+      "title_id": "trade",
+      "word": "trade",
+      "automatic_onset_seconds": 5.3,
+      "visual_frame": 159,
+      "visual_minus_estimate_ms": 0.0,
+      "sfx_id": "trade-tick",
+      "sfx_frame": 159,
+      "visual_sfx_frame_offset": 0
+    },
+    {
+      "title_id": "connections",
+      "word": "connections",
+      "automatic_onset_seconds": 8.58,
+      "visual_frame": 257,
+      "visual_minus_estimate_ms": -13.333,
+      "sfx_id": "new-node",
+      "sfx_frame": 257,
+      "visual_sfx_frame_offset": 0
+    },
+    {
+      "title_id": "only",
+      "word": "not",
+      "automatic_onset_seconds": 12.18,
+      "visual_frame": 365,
+      "visual_minus_estimate_ms": -13.333,
+      "sfx_id": "qualifier",
+      "sfx_frame": 365,
+      "visual_sfx_frame_offset": 0
+    }
+  ],
+  "scene_beat_frames": [
+    105,
+    210,
+    330
+  ],
+  "beat_spacing_frames": 15.0,
+  "limits": "ASR errors, AAC encoding, signal latency, acoustic onset, phoneme alignment, perceived timing and listening are not evaluated."
+}
