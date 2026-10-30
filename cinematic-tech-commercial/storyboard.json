@@ -1,0 +1,50 @@
+[
+  {
+    "scene_id": "scene_01",
+    "duration_seconds": 4.7,
+    "voiceover_text": "Why would two countries trade using a currency neither one issues?",
+    "visual_action": "An atmospheric deep-navy volumetric grid and drifting particles establish depth, never flat black. Two abstract 3D country markers, A and B, move toward one another as the camera accelerates between them with a spring-driven parallax push. A glowing USD token appears on the path between them. Kinetic type builds the question in readable phrase groups; on “neither,” emphasize NEITHER with a brief screen shake, chromatic split and controlled flash. The markers are illustrative and do not identify a real trade pair.",
+    "audio_action": "An original, low dark-synth pulse rises under the VO. A short metallic sweep follows the camera push. On the spoken “neither,” trigger a sub-bass impact on the same planned cue as the shake, chromatic split and flash; duck the music beneath the voice.",
+    "energy_level": 8,
+    "impact_words": [
+      "neither"
+    ],
+    "transition_type": "glitch"
+  },
+  {
+    "scene_id": "scene_02",
+    "duration_seconds": 3.4,
+    "voiceover_text": "The dollar isn't the world's only currency —",
+    "visual_action": "The USD token carries through a brief glitch into a textured, vignetted 3D space. A spring-driven camera arc reveals distinct USD, EUR and JPY symbols at different depths. Large kinetic text reads NOT THE ONLY throughout the reveal, preserving the qualifier rather than flashing ONLY by itself. On “only,” apply a brief screen shake, chromatic split and controlled flash; leave the full qualifier legible.",
+    "audio_action": "The pulse briefly thins on “isn’t,” with a short tape-stop texture that does not interrupt the narration. On the spoken “only,” add a sub-bass impact synchronized to the planned shake, split and flash; a restrained electronic tick accompanies each alternative-currency reveal.",
+    "energy_level": 7,
+    "impact_words": [
+      "only"
+    ],
+    "transition_type": "hard cut"
+  },
+  {
+    "scene_id": "scene_03",
+    "duration_seconds": 5.0,
+    "voiceover_text": "it's the leading one for trade, finance, and central bank reserves.",
+    "visual_action": "A spring-accelerated camera move tracks past a prominent dimensional USD object into three distinct HUD lanes labeled TRADE, FINANCE and CENTRAL BANK RESERVES, revealed in the order spoken. Other currency symbols remain visible in the background; no invented statistics or measured charts are shown. On “leading,” pulse LEADING with brief screen shake, chromatic split and controlled flash, then hold the category labels long enough to read against the textured, vignetted environment.",
+    "audio_action": "Bring back the driving synth rhythm. A rising electronic sweep leads into the phrase; on the spoken “leading,” trigger a sub-bass impact with the planned shake, split and flash. Three quiet, distinct UI clicks follow the category reveals while the music ducks beneath the VO.",
+    "energy_level": 9,
+    "impact_words": [
+      "leading"
+    ],
+    "transition_type": "flash"
+  },
+  {
+    "scene_id": "scene_04",
+    "duration_seconds": 4.7,
+    "voiceover_text": "So how did that happen? The answer starts in 1944.",
+    "visual_action": "The HUD lanes spring backward into depth as the camera turns toward a luminous 3D timeline suspended over a textured grid. The question HOW DID THAT HAPPEN? appears in a readable hold, then recedes as the camera rapidly approaches 1944. On “1944,” the date lands large and legible with a brief screen shake, chromatic split and controlled flash. Hold the date as a historical setup without adding unspoken historical claims.",
+    "audio_action": "Reduce the percussion under the question, then build a short riser toward the date. On the spoken “1944,” trigger a sub-bass drop with the planned shake, split and flash; let its tail resolve beneath the final hold.",
+    "energy_level": 9,
+    "impact_words": [
+      "1944"
+    ],
+    "transition_type": "hard cut"
+  }
+]
