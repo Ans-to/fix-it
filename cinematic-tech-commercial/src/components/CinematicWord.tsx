@@ -1,12 +1,14 @@
 import React, {type CSSProperties, type ReactNode} from 'react';
-import {AbsoluteFill, Audio, random, Sequence, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 
 export type CinematicWordProps = {
   text: string;
   /** Hit frame relative to the current Sequence, not necessarily the composition. */
   triggerFrame: number;
-  /** A licensed/local sub-bass asset, e.g. staticFile('audio/impact.wav'). */
-  impactSoundSrc: string;
+  /** Asset path relative to public/, e.g. 'sub_drop.mp3' (not a resolved URL). */
+  impactSoundSrc?: string;
+  /** Set false when AudioTrack triggers all impact sounds centrally. */
+  playImpactSound?: boolean;
   /** Put every visible scene layer here so the entire viewport shakes together. */
   children: ReactNode;
   impactVolume?: number;
@@ -18,13 +20,15 @@ export type CinematicWordProps = {
 
 /**
  * Impact word and viewport wrapper. Only children of this component are shaken;
- * mount all scene visuals inside it, not as siblings. The audio source is
- * required, but the component does not provide or verify a sub-bass asset.
+ * mount all scene visuals inside it, not as siblings. By default an audio
+ * source is required. Disable its sound when using the central AudioTrack,
+ * which triggers the sub-drop, to avoid doubling the effect.
  */
 export const CinematicWord: React.FC<CinematicWordProps> = ({
   text,
   triggerFrame,
   impactSoundSrc,
+  playImpactSound = true,
   children,
   impactVolume = 1,
   seed = 'cinematic-word',
@@ -36,7 +40,7 @@ export const CinematicWord: React.FC<CinematicWordProps> = ({
   if (!Number.isInteger(triggerFrame) || triggerFrame < 0) {
     throw new Error('CinematicWord triggerFrame must be a non-negative integer.');
   }
-  if (!impactSoundSrc) {
+  if (playImpactSound && !impactSoundSrc) {
     throw new Error('CinematicWord requires a sub-bass impactSoundSrc.');
   }
   if (!Number.isFinite(shakePixels) || shakePixels <= 0) {
@@ -97,9 +101,11 @@ export const CinematicWord: React.FC<CinematicWordProps> = ({
           style={{backgroundColor: '#f7fff1', opacity: 0.3, pointerEvents: 'none'}}
         />
       )}
-      <Sequence from={triggerFrame} layout="none">
-        <Audio src={impactSoundSrc} volume={impactVolume} />
-      </Sequence>
+      {playImpactSound && impactSoundSrc && (
+        <Sequence from={triggerFrame} layout="none">
+          <Audio src={staticFile(impactSoundSrc)} volume={impactVolume} />
+        </Sequence>
+      )}
     </AbsoluteFill>
   );
 };

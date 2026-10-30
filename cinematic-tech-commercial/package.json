@@ -20,6 +20,7 @@
     "typescript": "5.9.3"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit --strict --skipLibCheck --jsx react-jsx --esModuleInterop --module esnext --target es2020 --moduleResolution bundler src/components/Atmosphere.tsx src/components/CinematicWord.tsx"
+    "typecheck": "tsc --noEmit --strict --skipLibCheck --jsx react-jsx --esModuleInterop --module esnext --target es2020 --moduleResolution bundler src/components/Atmosphere.tsx src/components/CinematicWord.tsx src/audio/AudioTrack.tsx",
+    "test:audio": "tsc --outDir .audio-test-build --strict --skipLibCheck --jsx react-jsx --esModuleInterop --module commonjs --target es2020 --moduleResolution node src/audio/AudioTrack.tsx && node --test tests/audio-track.test.cjs"
   }
 }
