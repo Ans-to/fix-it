@@ -1,32 +1,34 @@
 # Production plan
 
-## Brief and truth
-Audience / knowledge: 
-Objective and message: 
-Viewer promise and payoff: 
-Confirmed format / platform / placement / duration / fps: 
-Confirmed facts and sources: 
-Assets and permissions: 
-Proposed assumptions: 
-Missing or unverified: 
+## Intake and truth
+| Field | CONFIRMED / PROPOSED / UNKNOWN | Value, provenance, materiality and approval needed |
+|---|---|---|
+| Audience / message / objective | | |
+| Platform, placement, locale and device | | |
+| Duration, fps, aspect, resolution, audio | | |
+| Assets, facts, rights and constraints | | |
 
-## Direction
-Hook alternatives and recommendation, where useful: 
-Narrative structure and visual proof per beat: 
-Art direction, medium and rationale: 
-Motion and pacing / deliberate stillness: 
-Voice, sound, captions and description needs: 
-Platform-specific layout and verified specifications: 
-Feasibility, dependencies and fallback: 
+Viewer promise, opening and direct payoff:
+Blocking questions / safe conditional work:
+Creative direction, medium and motion rationale:
+Claim/proof map: `claim-proof-map.md` or embedded equivalent.
 
 ## Storyboard
-| Scene | Range / status | Purpose and proof | VO / exact copy | Composition, layers and assets | Motion path, timing and reading hold | Sound / captions | Transition | Constraints and review evidence |
-|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | |
+| Scene | Normalized / seconds / frames; confirmation status | Purpose, proof, VO and on-screen text | Visual layout, layers, camera, assets | Motion/event/transition & timing | Reading hold: text ID, settle→remove, duration, estimate method, risk | Captions / audio / visual description | Acceptance & evidence |
+|---|---|---|---|---|---|---|---|
+| | | | | | | | |
 
-## Technical handoff
-Canvas / coordinate origin / fps / total frames and rounding: 
-Transitions and overlap: 
-Format-specific safe areas and source/status: 
-Asset, font and audio-stem requirements: 
-Deterministic/seekable rendering requirements: 
+## Primitive-level handoff
+| Scene / object ID | Shape + text/font/metrics + container | Coordinates, camera, transforms, interval | Containment margin / shape test | Connector contact/gap tolerance and frames | Planned / tested status + evidence |
+|---|---|---|---|---|---|
+| | | | | | |
+
+## Captions and placement
+Cue ID / transcript / line breaks / shaped width / panel bounds / one-or-multiline alignment / actual VO sync status:
+Per-placement spec, source URL, access date, locale/device/overlay and verification:
+
+## Frame contract and dependencies
+Confirmed/proposed fps and duration, rounding and total:
+Normalized beats or illustrative timing if unconfirmed:
+Overlaps, audio offsets, captions and deterministic render rules:
+Manifest, required assets/fonts/stems, delivery and exact hash comparison status:

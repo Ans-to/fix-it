@@ -78,8 +78,12 @@ def facts_valid(p):
 
 
 def review_valid(p):
-    states = {'PASS', 'FAIL', 'NOT CHECKED', 'NEEDS HUMAN REVIEW'}
-    return all(item['status'] in states and (item['status'] != 'PASS' or bool(item.get('evidence'))) for item in p['review'])
+    # Minimal fixture schema; this does not establish that scope is complete.
+    states = {'PASS', 'PARTIAL', 'FAIL', 'NOT CHECKED', 'NEEDS HUMAN REVIEW', 'NOT APPLICABLE'}
+    return all(item['status'] in states
+               and (item['status'] not in {'PASS', 'PARTIAL', 'FAIL'} or bool(item.get('evidence')))
+               and (item['status'] != 'NOT APPLICABLE' or bool(item.get('reason')))
+               for item in p['review'])
 
 
 class ContractTests(unittest.TestCase):
@@ -130,6 +134,18 @@ class ContractTests(unittest.TestCase):
     def test_review_statuses_need_evidence_for_pass(self): self.assertTrue(review_valid(self.p))
     def test_unsubstantiated_pass_is_detected(self):
         self.p['review'].append({'check':'audio reviewed','status':'PASS','evidence':None})
+        self.assertFalse(review_valid(self.p))
+    def test_partial_requires_some_evidence(self):
+        item={'check':'full geometry','status':'PARTIAL','evidence':'three selected frames'}
+        self.p['review'].append(item)
+        self.assertTrue(review_valid(self.p))
+        item['evidence']=None
+        self.assertFalse(review_valid(self.p))
+    def test_not_applicable_requires_reason(self):
+        item={'check':'audio','status':'NOT APPLICABLE','reason':'intentionally silent'}
+        self.p['review'].append(item)
+        self.assertTrue(review_valid(self.p))
+        item['reason']=''
         self.assertFalse(review_valid(self.p))
 
 if __name__ == '__main__': unittest.main(verbosity=2)
