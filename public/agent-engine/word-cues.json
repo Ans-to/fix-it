@@ -2,127 +2,127 @@
   {
     "word": "Welcome",
     "startFrame": 9,
-    "endFrame": 23,
+    "endFrame": 20,
     "scene": "HookScene"
   },
   {
     "word": "to",
-    "startFrame": 26,
-    "endFrame": 37,
+    "startFrame": 20,
+    "endFrame": 24,
     "scene": "HookScene"
   },
   {
     "word": "the",
-    "startFrame": 40,
-    "endFrame": 49,
+    "startFrame": 24,
+    "endFrame": 28,
     "scene": "HookScene"
   },
   {
     "word": "Agent",
-    "startFrame": 52,
-    "endFrame": 68,
+    "startFrame": 28,
+    "endFrame": 37,
     "scene": "HookScene"
   },
   {
     "word": "Engine",
-    "startFrame": 71,
-    "endFrame": 85,
+    "startFrame": 37,
+    "endFrame": 53,
     "scene": "HookScene"
   },
   {
     "word": "Unexpected",
     "startFrame": 189,
-    "endFrame": 215,
+    "endFrame": 207,
     "scene": "TwistScene"
   },
   {
     "word": "shift",
-    "startFrame": 218,
-    "endFrame": 233,
+    "startFrame": 207,
+    "endFrame": 216,
     "scene": "TwistScene"
   },
   {
     "word": "in",
-    "startFrame": 236,
-    "endFrame": 246,
+    "startFrame": 216,
+    "endFrame": 220,
     "scene": "TwistScene"
   },
   {
     "word": "logic",
-    "startFrame": 249,
-    "endFrame": 263,
+    "startFrame": 220,
+    "endFrame": 237,
     "scene": "TwistScene"
   },
   {
     "word": "Transition",
     "startFrame": 339,
-    "endFrame": 361,
+    "endFrame": 357,
     "scene": "ShiftScene"
   },
   {
     "word": "state",
-    "startFrame": 364,
-    "endFrame": 378,
+    "startFrame": 357,
+    "endFrame": 366,
     "scene": "ShiftScene"
   },
   {
     "word": "reconfiguration",
-    "startFrame": 381,
-    "endFrame": 412,
+    "startFrame": 366,
+    "endFrame": 399,
     "scene": "ShiftScene"
   },
   {
     "word": "Core",
     "startFrame": 519,
-    "endFrame": 530,
+    "endFrame": 526,
     "scene": "MechanismScene"
   },
   {
     "word": "mechanism",
-    "startFrame": 533,
-    "endFrame": 553,
+    "startFrame": 526,
+    "endFrame": 541,
     "scene": "MechanismScene"
   },
   {
     "word": "engagement",
-    "startFrame": 556,
-    "endFrame": 581,
+    "startFrame": 541,
+    "endFrame": 567,
     "scene": "MechanismScene"
   },
   {
     "word": "Ultimate",
     "startFrame": 729,
-    "endFrame": 746,
+    "endFrame": 744,
     "scene": "PayoffScene"
   },
   {
     "word": "resolution",
-    "startFrame": 749,
-    "endFrame": 772,
+    "startFrame": 744,
+    "endFrame": 761,
     "scene": "PayoffScene"
   },
   {
     "word": "achieved",
-    "startFrame": 775,
-    "endFrame": 795,
+    "startFrame": 761,
+    "endFrame": 782,
     "scene": "PayoffScene"
   },
   {
     "word": "Final",
     "startFrame": 909,
-    "endFrame": 923,
+    "endFrame": 920,
     "scene": "OutroScene"
   },
   {
     "word": "conclusion",
-    "startFrame": 926,
-    "endFrame": 946,
+    "startFrame": 920,
+    "endFrame": 936,
     "scene": "OutroScene"
   },
   {
     "word": "complete",
-    "startFrame": 949,
-    "endFrame": 962,
+    "startFrame": 936,
+    "endFrame": 954,
     "scene": "OutroScene"
   }
 ]

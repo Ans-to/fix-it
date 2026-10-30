@@ -2,43 +2,51 @@
 
 The 1080 × 1920 composition is 1,547 frames at 30 fps. `npm ci` installs the
 Node dependencies. `npm run validate` checks TypeScript and the existing
-frame-cue/source rules. `npm run render` bundles the registered composition and
-renders all six scenes to `out/video.mp4` (H.264), including the narration if
-`public/agent-engine/voiceover.wav` exists. Remotion requires a compatible
-Chrome/Chromium installation; set `REMOTION_BROWSER_EXECUTABLE` to its path if
-needed. Output and bundle progress are logged.
+frame-cue/source rules. `npm run render` bundles the composition and renders
+all six scenes to `out/video.mp4` with narration. Remotion requires a compatible
+Chrome/Chromium installation; set `REMOTION_BROWSER_EXECUTABLE` if needed.
 
-## Regenerating the narration
+## Regenerating and aligning narration
 
-The scene texts and fixed frame ranges live in `scripts/narration.json`. The
-script uses the **Jenny (Dioco)** Piper voice, an open-source speech model. It
-synthesizes each word individually, trims leading/trailing silence and places
-it on a frame boundary, then derives cues from the resulting audio sample
-positions (not character-count estimates). This provides measurable timing,
-but word-by-word synthesis can sound less natural than sentence-level TTS.
-There are deliberate silent pauses between the short scene texts.
+`scripts/narration.json` holds the six scene texts and fixed scene ranges. The
+current recordings in `public/agent-engine/scenes/` use a selected natural voice
+and speak each complete phrase rather than synthesizing isolated words. The
+short phrases leave intentional silent intervals within the fixed scene lengths;
+changing that requires longer text or different scene timings.
 
-Install Python 3 and Piper, and obtain a compatible Piper ONNX model and its
-JSON config (the model is not committed). For example, the generated audio uses
-the Jenny voice from https://github.com/piper-tts-go/piper-voice-jenny (model
-card and dataset details: https://github.com/dioco-group/jenny-tts-dataset).
+The voiceover script converts each recording to PCM, checks that it fits its
+scene, and uses PocketSphinx forced alignment against the actual audio and known
+text. It converts estimated acoustic boundaries to 30 fps frames and assembles
+`public/agent-engine/voiceover.wav` and `word-cues.json`. Alignment is estimated,
+not guaranteed word-exact; listen and inspect the cues, particularly for
+unfamiliar words. PocketSphinx requires all words in its pronunciation
+dictionary and reports an error instead of fabricating timestamps otherwise.
+
+To re-align the included recordings:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install piper-tts==1.8.0 zstandard==0.25.0
-# Download https://github.com/piper-tts-go/piper-voice-jenny/archive/refs/heads/main.tar.gz
-# Extract dist.tzst from that archive and decompress it to obtain voice.onnx
-# and voice.json. (For example: zstd -d dist.tzst -c | tar -xf -)
-PIPER_PYTHON=.venv/bin/python \
-PIPER_MODEL=/absolute/path/to/voice.onnx \
-PIPER_CONFIG=/absolute/path/to/voice.json npm run voiceover
+.venv/bin/pip install pocketsphinx==5.1.1
+npm ci
+ALIGN_PYTHON=.venv/bin/python npm run voiceover
 npm run validate
 npm run render
 ```
 
-Generation overwrites `public/agent-engine/voiceover.wav` and
-`public/agent-engine/word-cues.json`. The model's dataset requires the voice to
-be identified as Jenny (Dioco) where practical in interfaces that generate
-speech. If the WAV is missing, rendering emits a warning and produces a silent
-video. The validator's existing coverage warning is expected because the
-short narration does not fill every frame.
+If you change the text, first provide matching new recordings or synthesize them
+through ElevenLabs; forced alignment assumes the supplied transcript is correct.
+You can set `VOICE_SCENES_DIR` to a directory containing six WAV files named
+`hook`, `twist`, `shift`, `mechanism`, `payoff` and `outro`. Set `FFMPEG_PATH`
+if FFmpeg is not installed or available in Remotion's compositor package.
+
+To synthesize new scene recordings through ElevenLabs instead, set
+`ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` in your environment before
+running the voiceover script. Optionally set `ELEVENLABS_MODEL_ID` (default
+`eleven_multilingual_v2`). This uses the ElevenLabs API and may incur charges;
+it requires network access and an account. Generated clips replace the stored
+scene recordings only after all six scenes have been processed. Do not commit
+API keys. The ElevenLabs path requires a valid key and has not been exercised in
+this environment.
+
+The validator's cue-coverage warning is expected because the narration is much
+shorter than the full composition.

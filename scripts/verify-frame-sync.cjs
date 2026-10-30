@@ -18,6 +18,7 @@ const KINETIC_ENGINE_PATH = path.join(ROOT_DIR, 'src', 'KineticEngine.tsx');
 const COLORS_PATH = path.join(ROOT_DIR, 'src', 'colors.ts');
 const ROOT_TSX_PATH = path.join(ROOT_DIR, 'src', 'Root.tsx');
 const CONTEXTUAL_UI_PATH = path.join(ROOT_DIR, 'src', 'ContextualUiSimulation.tsx');
+const STARFIELD_PATH = path.join(ROOT_DIR, 'src', 'Starfield.tsx');
 
 // Validation Results
 let validationErrors = [];
@@ -111,7 +112,7 @@ try {
   }
   
   // Check for future word prevention (frame <= word.endFrame for active words)
-  const activeWordPattern = /frame\s*>=\s*word\.startFrame\s*&&\s*frame\s*<=\s*word\.endFrame/;
+  const activeWordPattern = /frame\s*>=\s*word\.startFrame\s*&&\s*frame\s*<={0,1}\s*word\.endFrame/;
   if (!activeWordPattern.test(kineticEngineCode)) {
     validationWarnings.push('Active word boundary check (frame <= word.endFrame) pattern not clearly found');
   }
@@ -203,15 +204,23 @@ try {
   const rootCode = fs.readFileSync(ROOT_TSX_PATH, 'utf8');
   const kineticCode = fs.readFileSync(KINETIC_ENGINE_PATH, 'utf8');
   const contextualCode = fs.readFileSync(CONTEXTUAL_UI_PATH, 'utf8');
+  const starfieldCode = fs.readFileSync(STARFIELD_PATH, 'utf8');
   
-  const requiredZIndices = [1, 20, 55, 65, 75];
+  const requiredZIndices = [1, 10, 20, 55, 65, 75];
   requiredZIndices.forEach(zIndex => {
     const pattern = new RegExp(`zIndex:\\s*${zIndex}`);
-    if (!pattern.test(rootCode) && !pattern.test(kineticCode) && !pattern.test(contextualCode)) {
+    if (!pattern.test(rootCode) && !pattern.test(kineticCode) && !pattern.test(contextualCode) && !pattern.test(starfieldCode)) {
       validationErrors.push(`Missing zIndex: ${zIndex} in Root.tsx, KineticEngine.tsx, or ContextualUiSimulation.tsx`);
     }
   });
   
+  if (!/<canvas\b/.test(starfieldCode) || !/useCurrentFrame\(\)/.test(starfieldCode) || !/frame\s*\/\s*fps/.test(starfieldCode)) {
+    validationErrors.push('Starfield must use a frame-driven canvas');
+  }
+  if (!/spring\s*\(\s*\{[\s\S]*?stiffness:\s*300,\s*damping:\s*10/.test(kineticCode)) {
+    validationErrors.push('Hook impact must use the requested Remotion spring configuration');
+  }
+
   // Check for single container violation (no flex/grid wrapping everything)
   const flexGridPattern = /display:\s*(flex|grid);\s*.*zIndex/i;
   if (flexGridPattern.test(rootCode) || flexGridPattern.test(kineticCode) || flexGridPattern.test(contextualCode)) {

@@ -2,7 +2,6 @@ import React from 'react';
 import { SCENE_STARTS } from './scene-starts.js';
 import {
   AbsoluteFill,
-  Composition,
   Sequence,
   useCurrentFrame,
   useVideoConfig,
@@ -11,7 +10,6 @@ import {
   staticFile,
 } from 'remotion';
 import {
-  OBSIDIAN_FOUNDATION,
   SAFETY_ORANGE_ACCENT,
   ELECTRIC_WHITE_FOREGROUND,
   CRIMSON_ALERT,
@@ -39,23 +37,15 @@ const HookClimaxMotion: React.FC<HookClimaxMotionProps> = ({ word, frame, index 
   const delay = index * 5;
   const localFrame = frame - word.startFrame - delay;
   
-  // Spring physics: stiffness: 300, damping: 8
+  // Start the word on its cue; stagger only the impact animation, not the text.
+  const { fps, width } = useVideoConfig();
   const springValue = spring({
-    fps: 30,
-    durationInFrames: 1547,
-    // Only animate during word's active window
-    frame: localFrame >= 0 && localFrame <= (word.endFrame - word.startFrame) 
-      ? 1 
-      : 0,
-    config: {
-      stiffness: 300,
-      damping: 8,
-    },
+    fps,
+    frame: Math.max(0, localFrame),
+    config: { stiffness: 300, damping: 10 },
   });
-
-  // Vertical slam and scale transitions
-  const translateY = springValue * -100 + (1 - springValue) * 0; // Slam down then bounce up
-  const scale = 0.5 + springValue * 1.5; // Scale from 0.5 to 2.0
+  const translateY = -(1 - springValue) * width * 0.12;
+  const scale = 1 + (1 - springValue) * 0.35;
 
   return (
     <span
@@ -64,11 +54,11 @@ const HookClimaxMotion: React.FC<HookClimaxMotionProps> = ({ word, frame, index 
         margin: '0 8px',
         transform: `translateY(${translateY}px) scale(${scale})`,
         color:
-          frame >= word.startFrame && frame <= word.endFrame
+          frame >= word.startFrame && frame < word.endFrame
             ? SAFETY_ORANGE_ACCENT
             : ELECTRIC_WHITE_FOREGROUND,
         transition: 'color 0.1s ease',
-        opacity: localFrame >= 0 ? 1 : 0,
+        opacity: frame >= word.startFrame ? 1 : 0,
       }}
     >
       {word.word}
@@ -84,18 +74,15 @@ interface CodeTypewriterMotionProps {
 }
 
 const CodeTypewriterMotion: React.FC<CodeTypewriterMotionProps> = ({ word, frame, index }) => {
-  // Staggered token-level delay: 8 frames per word offset
-  const delay = index * 8;
-  const localFrame = frame - word.startFrame - delay;
-  
-  // Character-accurate typing: 3 frames per character
-  const charsTyped = Math.max(0, Math.min(word.word.length, Math.floor(localFrame / 3)));
+  // The first character appears at the spoken onset; the rest are typed over
+  // the measured word duration. Stagger the cursor effect, not the cue itself.
+  const localFrame = frame - word.startFrame;
+  const duration = Math.max(1, word.endFrame - word.startFrame);
+  const charsTyped = localFrame < 0 ? 0 : Math.min(word.word.length,
+    1 + Math.floor((localFrame / duration) * word.word.length));
   const visibleText = word.word.substring(0, charsTyped);
-  
-  // Blinking cursor: 15 frames on/off cycle
-  const cursorVisible = Math.floor(localFrame / 15) % 2 === 0;
-  
-  const opacity = localFrame >= 0 ? 1 : 0;
+  const cursorVisible = Math.floor((localFrame - index * 8) / 15) % 2 === 0;
+  const opacity = frame >= word.startFrame ? 1 : 0;
 
   return (
     <span
@@ -134,7 +121,7 @@ const MetricGlitchMotion: React.FC<MetricGlitchMotionProps> = ({ word, frame, in
   const aberrationX = (Math.sin(localFrame * 0.5) * 3) * (localFrame % 5 === 0 ? 1 : 0);
   const aberrationY = (Math.cos(localFrame * 0.3) * 2) * (localFrame % 5 === 0 ? 1 : 0);
   
-  const opacity = localFrame >= 0 ? 1 : 0;
+  const opacity = frame >= word.startFrame ? 1 : 0;
 
   return (
     <span
@@ -143,7 +130,7 @@ const MetricGlitchMotion: React.FC<MetricGlitchMotionProps> = ({ word, frame, in
         margin: '0 8px',
         transform: `translateY(${scanlineOffset}px) translateX(${aberrationX}px)`,
         color:
-          frame >= word.startFrame && frame <= word.endFrame
+          frame >= word.startFrame && frame < word.endFrame
             ? CRIMSON_ALERT
             : ELECTRIC_WHITE_FOREGROUND,
         textShadow: localFrame % 5 === 0
@@ -197,15 +184,13 @@ const WordSynchronizer: React.FC<WordSynchronizerProps> = ({ sceneName }) => {
   };
 
   return (
-    <AbsoluteFill style={{ zIndex: 55 }}>
+    <AbsoluteFill style={{ inset: 0, zIndex: 55, display: 'flex', justifyContent: 'center', alignItems: 'center', pointerEvents: 'none' }}>
       <div
         style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          width: '100%',
+          transformOrigin: 'center center',
           color: ELECTRIC_WHITE_FOREGROUND,
-          fontSize: '64px',
+          fontSize: Math.min(width * 0.085, height * 0.06),
           fontWeight: 'bold',
           textAlign: 'center',
           fontFamily: 'sans-serif',
@@ -228,25 +213,9 @@ const WordSynchronizer: React.FC<WordSynchronizerProps> = ({ sceneName }) => {
 
 // Isolated Scene Components with complete unmounting
 export const HookScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="HookScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '15%',
-            left: '15%',
-            width: '70%',
-            height: '70%',
-            border: `2px solid ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '20px',
-            opacity: 0.3,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="HookScene" />
       {/* Telemetry HUD for Hook */}
@@ -267,25 +236,9 @@ export const HookScene: React.FC = () => {
 };
 
 export const TwistScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="TwistScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            left: '20%',
-            width: '60%',
-            height: '60%',
-            border: `2px dashed ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '30px',
-            opacity: 0.4,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="TwistScene" />
       {/* Telemetry HUD for Twist */}
@@ -306,25 +259,9 @@ export const TwistScene: React.FC = () => {
 };
 
 export const ShiftScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="ShiftScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '25%',
-            left: '25%',
-            width: '50%',
-            height: '50%',
-            border: `2px solid ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '40px',
-            opacity: 0.5,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="ShiftScene" />
       {/* Telemetry HUD for Shift */}
@@ -345,25 +282,9 @@ export const ShiftScene: React.FC = () => {
 };
 
 export const MechanismScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="MechanismScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '30%',
-            left: '30%',
-            width: '40%',
-            height: '40%',
-            border: `2px dotted ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '50px',
-            opacity: 0.6,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="MechanismScene" />
       {/* Telemetry HUD for Mechanism */}
@@ -384,25 +305,9 @@ export const MechanismScene: React.FC = () => {
 };
 
 export const PayoffScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="PayoffScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '35%',
-            left: '35%',
-            width: '30%',
-            height: '30%',
-            border: `3px solid ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '60px',
-            opacity: 0.7,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="PayoffScene" />
       {/* Telemetry HUD for Payoff */}
@@ -423,25 +328,9 @@ export const PayoffScene: React.FC = () => {
 };
 
 export const OutroScene: React.FC = () => {
-  const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ backgroundColor: OBSIDIAN_FOUNDATION, zIndex: 1 }}>
+    <AbsoluteFill style={{ inset: 0 }}>
       <WordSynchronizer sceneName="OutroScene" />
-      {/* Scene-specific background widgets */}
-      <AbsoluteFill style={{ zIndex: 20 }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '40%',
-            width: '20%',
-            height: '20%',
-            border: `4px solid ${SAFETY_ORANGE_ACCENT}`,
-            borderRadius: '70px',
-            opacity: 0.8,
-          }}
-        />
-      </AbsoluteFill>
       {/* Contextual UI Simulation */}
       <ContextualUiSimulation sceneName="OutroScene" />
       {/* Telemetry HUD for Outro */}

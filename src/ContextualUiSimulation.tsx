@@ -82,7 +82,7 @@ const CLITypewriterCard: React.FC<CLITypewriterCardProps> = ({ frame, word }) =>
   // Blinking cursor
   const cursorVisible = Math.floor(localFrame / 10) % 2 === 0;
 
-  const opacity = localFrame >= 0 && localFrame <= (word.endFrame - word.startFrame) ? 1 : 0;
+  const opacity = localFrame >= 0 && localFrame < (word.endFrame - word.startFrame) ? 1 : 0;
 
   return (
     <div
@@ -134,7 +134,7 @@ const NodeGraphCard: React.FC<NodeGraphCardProps> = ({ frame, word }) => {
     { id: 'output', x: '50%', y: '70%', label: 'OUTPUT' },
   ];
 
-  const opacity = localFrame >= 0 && localFrame <= (word.endFrame - word.startFrame) ? 1 : 0;
+  const opacity = localFrame >= 0 && localFrame < (word.endFrame - word.startFrame) ? 1 : 0;
 
   return (
     <div
@@ -225,34 +225,25 @@ const DiagnosticWarningOverlay: React.FC<DiagnosticWarningOverlayProps> = ({ fra
   // Glitch effect
   const glitchOffset = Math.sin(localFrame * 0.8) * 3;
   
-  const opacity = localFrame >= 0 && localFrame <= (word.endFrame - word.startFrame) ? 1 : 0;
+  const opacity = localFrame >= 0 && localFrame < (word.endFrame - word.startFrame) ? 1 : 0;
 
   // Only render if conflict/break/error words are present (checked in parent)
   return (
-    <AbsoluteFill style={{ zIndex: 65 }}>
+    <AbsoluteFill style={{ inset: 0, zIndex: 65 }}>
       <div
         style={{
           position: 'absolute',
-          top: '0',
-          left: '0',
-          width: '100%',
-          height: '100%',
+          inset: 0,
           backgroundColor: 'rgba(225, 29, 72, 0.15)', // Crimson Alert with transparency
-          border: `2px solid ${CRIMSON_ALERT}`,
           boxShadow: `0 0 40px ${CRIMSON_ALERT}`,
           opacity,
-          transform: `translateY(${glitchOffset}px)`,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
           pointerEvents: 'none',
         }}
       >
-        <div style={{ color: CRIMSON_ALERT, fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
+        <div style={{ position: 'absolute', top: '30%', left: 0, width: '100%', textAlign: 'center', transform: `translateX(${glitchOffset}px)`, color: CRIMSON_ALERT, fontSize: '24px', fontWeight: 'bold' }}>
           DIAGNOSTIC WARNING: {word.word.toUpperCase()}
         </div>
-        <div style={{ color: ELECTRIC_WHITE_FOREGROUND, fontFamily: 'monospace', fontSize: '14px', textAlign: 'center' }}>
+        <div style={{ position: 'absolute', top: '33%', left: 0, width: '100%', color: ELECTRIC_WHITE_FOREGROUND, fontFamily: 'monospace', fontSize: '14px', textAlign: 'center' }}>
           {currentTrace}
         </div>
         {/* Volumetric shadow effect */}
@@ -283,7 +274,7 @@ export const ContextualUiSimulation: React.FC<ContextualUiSimulationProps> = ({ 
   
   // Find currently active word (frame within start/end)
   const activeWord = sceneWords.find(
-    (word: WordCue) => frame >= word.startFrame && frame <= word.endFrame
+    (word: WordCue) => frame >= word.startFrame && frame < word.endFrame
   );
 
   // Zero Dead Space: Only render active UI elements tied to narration
@@ -296,26 +287,21 @@ export const ContextualUiSimulation: React.FC<ContextualUiSimulationProps> = ({ 
   const isConflictBreakError = CONFLICT_BREAK_ERROR_WORDS.some((verb) => wordLower.includes(verb));
 
   return (
-    <AbsoluteFill style={{ zIndex: 20 }}>
+    <>
+      <AbsoluteFill style={{ inset: 0, zIndex: 20, pointerEvents: 'none' }}>
       {/* Render appropriate UI component based on action-verb mapping */}
       {isPromptInput && <CLITypewriterCard frame={frame} word={activeWord} />}
       
       {isArchitectureCompiling && <NodeGraphCard frame={frame} word={activeWord} />}
       
-      {/* Crimson diagnostic overlay (zIndex: 65) - separate from zIndex: 20 */}
-      {isConflictBreakError && <DiagnosticWarningOverlay frame={frame} word={activeWord} />}
-      
       {/* Default fallback: subtle activity indicator tied to narration */}
       {!isPromptInput && !isArchitectureCompiling && !isConflictBreakError && (
         <div
           style={{
-            ...glassmorphismStyle,
             position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '20%',
-            height: '10%',
+            bottom: '15%',
+            left: 0,
+            width: '100%',
             padding: '8px',
             fontSize: '14px',
             color: ELECTRIC_WHITE_FOREGROUND,
@@ -326,7 +312,10 @@ export const ContextualUiSimulation: React.FC<ContextualUiSimulationProps> = ({ 
           ACTIVE NARRATION: {activeWord.word.toUpperCase()}
         </div>
       )}
-    </AbsoluteFill>
+      </AbsoluteFill>
+      {/* Diagnostic mounts independently above the hero text. */}
+      {isConflictBreakError && <DiagnosticWarningOverlay frame={frame} word={activeWord} />}
+    </>
   );
 };
 
