@@ -1,0 +1,35 @@
+{
+  "engine": "Kokoro-82M-v1.0-ONNX q8, CPU",
+  "voice": "am_eric",
+  "voice_source": "kokoro-js@1.2.1",
+  "voice_sha256": "e8b5be17edd1e3636901ce7598baafe2dc8dd8ff707a0c23bf9e461add7e2832",
+  "model_sha256": "fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478",
+  "speed": 1.08,
+  "sample_rate": 24000,
+  "clips": [
+    {
+      "text": "Why does so much of the world rely on dollars?",
+      "duration_seconds": 2.5086666666666666,
+      "phonemes": "w\u02cca\u026a d\u02c8\u028cz s\u02c8o\u028a m\u02cc\u028ct\u0283 \u028cv\u00f0\u0259 w\u02c8\u025c\u02d0ld \u0279\u1d7bl\u02c8a\u026a \u02cc\u0254n d\u02c8\u0251\u02d0l\u025az?",
+      "file": "voice-1.wav"
+    },
+    {
+      "text": "Deep U.S. financial markets make dollars easy to trade and hold.",
+      "duration_seconds": 3.541125,
+      "phonemes": "d\u02c8i\u02d0p j\u02c8u\u02d0.\u02c8\u025bs. fa\u026an\u02c8\u00e6n\u0283\u0259l m\u02c8\u0251\u02d0\u0279k\u026ats m\u02cce\u026ak d\u02c8\u0251\u02d0l\u025az \u02c8i\u02d0zi t\u0259 t\u0279\u02c8e\u026ad \u00e6nd h\u02c8o\u028ald.",
+      "file": "voice-2.wav"
+    },
+    {
+      "text": "As more people accept dollars, they become more useful to others.",
+      "duration_seconds": 3.24125,
+      "phonemes": "\u00e6z m\u02c8\u0254\u02d0\u0279 p\u02c8i\u02d0p\u0259l \u0250ks\u02c8\u025bpt d\u02c8\u0251\u02d0l\u025az, \u00f0e\u026a b\u026ak\u02cc\u028cm m\u02c8\u0254\u02d0\u0279 j\u02c8u\u02d0sf\u0259l t\u028a \u02c8\u028c\u00f0\u025az.",
+      "file": "voice-3.wav"
+    },
+    {
+      "text": "That helps the dollar lead, but it's not the only global currency.",
+      "duration_seconds": 3.281083333333333,
+      "phonemes": "\u00f0\u00e6t h\u02c8\u025blps \u00f0\u0259 d\u02c8\u0251\u02d0l\u025a l\u02c8i\u02d0d, b\u02cc\u028ct \u026ats n\u02cc\u0251\u02d0t \u00f0\u026a \u02c8o\u028anli \u0261l\u02c8o\u028ab\u0259l k\u02c8\u025c\u02d0\u0279\u0259nsi.",
+      "file": "voice-4.wav"
+    }
+  ]
+}

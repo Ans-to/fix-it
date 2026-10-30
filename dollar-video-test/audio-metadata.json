@@ -1,0 +1,9 @@
+{
+  "sample_rate": 48000,
+  "channels": 2,
+  "duration_seconds": 15,
+  "peak_linear": 0.4917128737252178,
+  "rms_linear": 0.08104329109933874,
+  "source": "original procedural music/effects plus Kokoro am_eric; no sampled music",
+  "review": "Numerical signal checks only; human listening not performed."
+}

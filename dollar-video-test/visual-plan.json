@@ -1,0 +1,147 @@
+{
+  "schema_version": "dollar-pillow-profile-1.0.0",
+  "purpose": "illustrative test, not approved production master",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "fps_status": "PROPOSED",
+    "duration_seconds": 15,
+    "duration_status": "CONFIRMED",
+    "total_frames": 450,
+    "aspect_status": "PROPOSED",
+    "rationale": "Vertical test for Shorts, Reels and TikTok; exact dimensions/fps were not specified by user."
+  },
+  "visual_authority": "This manifest controls scene timing, text, colors and fonts; render_video.py defines the dollar-pillow-profile-1.0.0 scene geometry and animation algorithms. audio_mix.py defines audio synthesis and uses voice_start positions here.",
+  "coordinate_system": "Top-left; +x right, +y down; 1080x1920; text anchors as specified in renderer; screen-fixed elements.",
+  "colors": {
+    "paper": "#F4F1E9",
+    "ink": "#142738",
+    "blue": "#244BC7",
+    "muted": "#53616A",
+    "gold": "#C89045",
+    "cream": "#FDFCF8",
+    "white": "#FFFFFF",
+    "line": "#D9D9D1",
+    "navy": "#132939"
+  },
+  "assets": {
+    "mode": "original procedural graphics; no image/video inputs",
+    "fonts": [
+      {
+        "path": "fonts/Anton-Regular.ttf",
+        "sha256": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab"
+      },
+      {
+        "path": "fonts/Manrope-Variable.ttf",
+        "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6"
+      },
+      {
+        "path": "fonts/IBMPlexMono-Regular.ttf",
+        "sha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46"
+      }
+    ]
+  },
+  "voice": {
+    "engine": "Kokoro-82M-v1.0-ONNX q8, CPU",
+    "voice": "am_eric",
+    "model_sha256": "fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478",
+    "voice_sha256": "e8b5be17edd1e3636901ce7598baafe2dc8dd8ff707a0c23bf9e461add7e2832",
+    "speed": 1.08,
+    "captions": "full sentence per clip, cue timings from measured clip duration; no word-level alignment claim"
+  },
+  "audio": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "music": "original procedural synthesized ambient bed",
+    "effects": "original procedural soft clicks and sweeps",
+    "end_fade_seconds": 0.7
+  },
+  "scenes": [
+    {
+      "id": "question",
+      "start": 0,
+      "end": 85,
+      "number": "01",
+      "eyebrow": "THE GLOBAL MONEY QUESTION",
+      "headline": [
+        "WHY THE",
+        "DOLLAR?"
+      ],
+      "clip": 1,
+      "voice_start": 5,
+      "caption": [
+        "Why does so much of the world",
+        "rely on dollars?"
+      ],
+      "voice_duration_seconds": 2.5086666666666666,
+      "caption_start": 5,
+      "caption_end": 81
+    },
+    {
+      "id": "markets",
+      "start": 85,
+      "end": 195,
+      "number": "02",
+      "eyebrow": "THE FINANCIAL FOUNDATION",
+      "headline": [
+        "DEEP MARKETS.",
+        "EASY TO TRADE."
+      ],
+      "clip": 2,
+      "voice_start": 87,
+      "caption": [
+        "Deep U.S. financial markets make",
+        "dollars easy to trade and hold."
+      ],
+      "voice_duration_seconds": 3.541125,
+      "caption_start": 87,
+      "caption_end": 194
+    },
+    {
+      "id": "network",
+      "start": 195,
+      "end": 302,
+      "number": "03",
+      "eyebrow": "THE NETWORK EFFECT",
+      "headline": [
+        "MORE USERS.",
+        "MORE USEFUL."
+      ],
+      "clip": 3,
+      "voice_start": 197,
+      "caption": [
+        "As more people accept dollars,",
+        "they become more useful to others."
+      ],
+      "voice_duration_seconds": 3.24125,
+      "caption_start": 197,
+      "caption_end": 295
+    },
+    {
+      "id": "payoff",
+      "start": 302,
+      "end": 450,
+      "number": "04",
+      "eyebrow": "THE SHORT ANSWER",
+      "headline": [
+        "THE LEADER.",
+        "NOT THE ONLY."
+      ],
+      "clip": 4,
+      "voice_start": 303,
+      "caption": [
+        "That helps the dollar lead, but it's",
+        "not the only global currency."
+      ],
+      "voice_duration_seconds": 3.281083333333333,
+      "caption_start": 303,
+      "caption_end": 402
+    }
+  ],
+  "sources": [
+    "https://www.federalreserve.gov/econres/notes/feds-notes/2nd-annual-international-roles-of-the-us-dollar-conference-20230623.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/fifth-conference-on-the-international-roles-of-the-u-s-dollar-stablecoins-digital-payments-and-the-ir-of-the-usd-20260716.html",
+    "https://www.federalreserve.gov/econres/notes/feds-notes/the-international-role-of-the-u-s-dollar-2025-edition-20250718.html"
+  ]
+}
