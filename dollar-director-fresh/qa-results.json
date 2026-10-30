@@ -1,0 +1,43 @@
+{
+  "frames_checked": 1800,
+  "duration_seconds": 60.0,
+  "selected_issues": 0,
+  "voiceover_estimated_tokens": 141,
+  "estimated_tokens_per_minute_by_scene": {
+    "01_hook": 110.0,
+    "02_definition": 137.1,
+    "03_history": 128.6,
+    "04_gold_link": 157.5,
+    "05_1971": 128.6,
+    "06_reasons": 157.5,
+    "07_network": 150.0,
+    "08_payoff": 146.7
+  },
+  "nominal_contrast_ratios": {
+    "ivory/night": 15.74,
+    "slate/night": 10.82,
+    "gold/night": 10.66,
+    "ivory/surface": 12.75,
+    "gold/surface": 8.63,
+    "night/gold": 10.66
+  },
+  "preview_frames": [
+    90,
+    285,
+    495,
+    720,
+    945,
+    1170,
+    1410,
+    1665
+  ],
+  "manifest_sha256": "e20aaea5c37af01e592ea1a768dbe460040f899eb61280e4b9accee19dce98f2",
+  "limitations": [
+    "No actual video or audio rendered",
+    "Not a full all-object collision test",
+    "No audio sync test",
+    "No platform safe-area verification",
+    "No human comprehension or retention test",
+    "Contrast only fully opaque flat colors"
+  ]
+}
