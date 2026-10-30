@@ -1,0 +1,37 @@
+{
+  "canvas": [
+    360,
+    640
+  ],
+  "fps": 30,
+  "frames_requested": 180,
+  "seconds": 6.0,
+  "same_frame_raw_hashes_match": true,
+  "sampled_frames": [
+    0,
+    59,
+    60,
+    89,
+    90,
+    119,
+    120,
+    149,
+    150,
+    179
+  ],
+  "white_on_navy_contrast": 16.37,
+  "navy_on_turquoise_contrast": 10.83,
+  "video_has_audio": false,
+  "frame_hashes": {
+    "0": "4cbee4f020740c6b0dfc3feb40b1978f496266655cae12f3296ccbbbe62d329c",
+    "59": "4cbee4f020740c6b0dfc3feb40b1978f496266655cae12f3296ccbbbe62d329c",
+    "60": "dd842eb2ca4e6e7679086c1d8f00f42e7dd3db1de5830350a7216dea550ea9b3",
+    "89": "95ff1f5494a3add6ba0138b406355d6399154233bf432780876576434cfafe23",
+    "90": "95ff1f5494a3add6ba0138b406355d6399154233bf432780876576434cfafe23",
+    "119": "95ff1f5494a3add6ba0138b406355d6399154233bf432780876576434cfafe23",
+    "120": "b79da2c045d4fc01bae588182c62bffd47c26de07577e20f13e6e75cd107bb32",
+    "149": "3f19a6ff824b2076d961a52ca67c78a0fd1600ce598b98329682c663d499112c",
+    "150": "3f19a6ff824b2076d961a52ca67c78a0fd1600ce598b98329682c663d499112c",
+    "179": "3f19a6ff824b2076d961a52ca67c78a0fd1600ce598b98329682c663d499112c"
+  }
+}
